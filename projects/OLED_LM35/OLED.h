@@ -1,14 +1,14 @@
 /*
-* Project Name: OLED_DHT22
+* Project Name: OLED_LM35
 * File: OLED.h 
-* Description: OLED 128X32  SSD1306 I2C library header file
+* Description: OLED 128X64  SSD1306 I2C library header file
 * Author: Gavin Lyons.
 * Complier: xc8 v2.10 compiler
-* PIC: PIC16F18346
+* PIC: PIC18F47K42
 * IDE:  MPLAB X v5.30
 * Created: Feb  2020
 * Description: See URL for full details.
-* URL: https://github.com/gavinlyonsrepo/pic_i6F18346_projects
+* URL: https://github.com/gavinlyonsrepo/pic_18F47K42_projects
 */
 
 #ifndef OLED_H

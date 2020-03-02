@@ -53,13 +53,13 @@ The LM35 signal is read via an analog input(RD0) 10mV per degree. The ADC 0.0012
 
 LM35 calculation:
 
-Vout=0.01/°C
-°C=Vout/0.01
-°C=(Vout * 100) where Vout = ADC_value * (VCC/ADC resolution)
-°C = (ADC_value * (0.0012207)) * 100
-°C * 100 =(ADC_value * (0.0012207)) * 10000
-°C * 100 = 488 (Solved for an ADC value of 40) 4.88°C
-The RHS can then be parsed by code and displayed.
+1. Vout=0.01/°C
+2. °C=Vout/0.01
+3. °C=(Vout * 100) where Vout = ADC_value * (VCC/ADC resolution)
+4. °C = (ADC_value * (0.0012207)) * 100
+5. °C * 100 =(ADC_value * (0.0012207)) * 10000
+6. °C * 100 = 488 (Solved for an ADC value of 40) 4.88°C
+7. The RHS can then be parsed by code and displayed.
 
 Output
 -----------------------

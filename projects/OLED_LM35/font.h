@@ -3,14 +3,6 @@
 * File: font.h
 * Description: font 8*5 pixel Ascii font needs another byte between character.
 * used in Oled I2C project
-* Author: Gavin Lyons.
-* Complier: xc8 v2.00 compiler
-* PIC: PIC16F1619 
-* IDE:  MPLAB X v5.00
-* Development board: Microchip Curiosity Board, PIC16F1619
-* Created March 2019
-* Description: See URL for full details.
-* URL: https://github.com/gavinlyonsrepo/pic_16F1619_projects
 */
 
 #ifndef font_H
