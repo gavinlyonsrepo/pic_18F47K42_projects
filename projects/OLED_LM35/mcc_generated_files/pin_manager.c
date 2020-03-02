@@ -13,7 +13,7 @@
   Description:
     This header file provides implementations for pin APIs for all pins selected in the GUI.
     Generation Information :
-        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.79.0
+        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
         Device            :  PIC18F47K42
         Driver Version    :  2.11
     The generated drivers are tested against the following:
@@ -66,18 +66,18 @@ void PIN_MANAGER_Initialize(void)
     /**
     TRISx registers
     */
-    TRISE = 0x02;
+    TRISE = 0x06;
     TRISA = 0xFF;
-    TRISB = 0xF9;
-    TRISC = 0xFF;
+    TRISB = 0xFF;
+    TRISC = 0xE7;
     TRISD = 0xFF;
 
     /**
     ANSELx registers
     */
     ANSELD = 0xFF;
-    ANSELC = 0xFF;
-    ANSELB = 0xF9;
+    ANSELC = 0xE7;
+    ANSELB = 0xFF;
     ANSELE = 0x07;
     ANSELA = 0xFF;
 
@@ -105,7 +105,7 @@ void PIN_MANAGER_Initialize(void)
     */
     ODCONE = 0x00;
     ODCONA = 0x00;
-    ODCONB = 0x06;
+    ODCONB = 0x00;
     ODCONC = 0x18;
     ODCOND = 0x00;
 
@@ -134,10 +134,10 @@ void PIN_MANAGER_Initialize(void)
    
     
 	
-    I2C2SCLPPS = 0x09;   //RB1->I2C2:SCL2;    
-    RB1PPS = 0x23;   //RB1->I2C2:SCL2;    
-    RB2PPS = 0x24;   //RB2->I2C2:SDA2;    
-    I2C2SDAPPS = 0x0A;   //RB2->I2C2:SDA2;    
+    I2C1SDAPPS = 0x14;   //RC4->I2C1:SDA1;    
+    RC3PPS = 0x21;   //RC3->I2C1:SCL1;    
+    RC4PPS = 0x22;   //RC4->I2C1:SDA1;    
+    I2C1SCLPPS = 0x13;   //RC3->I2C1:SCL1;    
 }
   
 void PIN_MANAGER_IOC(void)

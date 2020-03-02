@@ -13,7 +13,7 @@
   @Description
     This header file provides APIs for driver for .
     Generation Information :
-        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.79.0
+        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
         Device            :  PIC18F47K42
         Driver Version    :  2.11
     The generated drivers are tested against the following:
@@ -65,29 +65,29 @@
 #define PULL_UP_ENABLED      1
 #define PULL_UP_DISABLED     0
 
-// get/set RB1 procedures
-#define RB1_SetHigh()            do { LATBbits.LATB1 = 1; } while(0)
-#define RB1_SetLow()             do { LATBbits.LATB1 = 0; } while(0)
-#define RB1_Toggle()             do { LATBbits.LATB1 = ~LATBbits.LATB1; } while(0)
-#define RB1_GetValue()              PORTBbits.RB1
-#define RB1_SetDigitalInput()    do { TRISBbits.TRISB1 = 1; } while(0)
-#define RB1_SetDigitalOutput()   do { TRISBbits.TRISB1 = 0; } while(0)
-#define RB1_SetPullup()             do { WPUBbits.WPUB1 = 1; } while(0)
-#define RB1_ResetPullup()           do { WPUBbits.WPUB1 = 0; } while(0)
-#define RB1_SetAnalogMode()         do { ANSELBbits.ANSELB1 = 1; } while(0)
-#define RB1_SetDigitalMode()        do { ANSELBbits.ANSELB1 = 0; } while(0)
+// get/set RC3 procedures
+#define RC3_SetHigh()            do { LATCbits.LATC3 = 1; } while(0)
+#define RC3_SetLow()             do { LATCbits.LATC3 = 0; } while(0)
+#define RC3_Toggle()             do { LATCbits.LATC3 = ~LATCbits.LATC3; } while(0)
+#define RC3_GetValue()              PORTCbits.RC3
+#define RC3_SetDigitalInput()    do { TRISCbits.TRISC3 = 1; } while(0)
+#define RC3_SetDigitalOutput()   do { TRISCbits.TRISC3 = 0; } while(0)
+#define RC3_SetPullup()             do { WPUCbits.WPUC3 = 1; } while(0)
+#define RC3_ResetPullup()           do { WPUCbits.WPUC3 = 0; } while(0)
+#define RC3_SetAnalogMode()         do { ANSELCbits.ANSELC3 = 1; } while(0)
+#define RC3_SetDigitalMode()        do { ANSELCbits.ANSELC3 = 0; } while(0)
 
-// get/set RB2 procedures
-#define RB2_SetHigh()            do { LATBbits.LATB2 = 1; } while(0)
-#define RB2_SetLow()             do { LATBbits.LATB2 = 0; } while(0)
-#define RB2_Toggle()             do { LATBbits.LATB2 = ~LATBbits.LATB2; } while(0)
-#define RB2_GetValue()              PORTBbits.RB2
-#define RB2_SetDigitalInput()    do { TRISBbits.TRISB2 = 1; } while(0)
-#define RB2_SetDigitalOutput()   do { TRISBbits.TRISB2 = 0; } while(0)
-#define RB2_SetPullup()             do { WPUBbits.WPUB2 = 1; } while(0)
-#define RB2_ResetPullup()           do { WPUBbits.WPUB2 = 0; } while(0)
-#define RB2_SetAnalogMode()         do { ANSELBbits.ANSELB2 = 1; } while(0)
-#define RB2_SetDigitalMode()        do { ANSELBbits.ANSELB2 = 0; } while(0)
+// get/set RC4 procedures
+#define RC4_SetHigh()            do { LATCbits.LATC4 = 1; } while(0)
+#define RC4_SetLow()             do { LATCbits.LATC4 = 0; } while(0)
+#define RC4_Toggle()             do { LATCbits.LATC4 = ~LATCbits.LATC4; } while(0)
+#define RC4_GetValue()              PORTCbits.RC4
+#define RC4_SetDigitalInput()    do { TRISCbits.TRISC4 = 1; } while(0)
+#define RC4_SetDigitalOutput()   do { TRISCbits.TRISC4 = 0; } while(0)
+#define RC4_SetPullup()             do { WPUCbits.WPUC4 = 1; } while(0)
+#define RC4_ResetPullup()           do { WPUCbits.WPUC4 = 0; } while(0)
+#define RC4_SetAnalogMode()         do { ANSELCbits.ANSELC4 = 1; } while(0)
+#define RC4_SetDigitalMode()        do { ANSELCbits.ANSELC4 = 0; } while(0)
 
 // get/set LM35_AND0 aliases
 #define LM35_AND0_TRIS                 TRISDbits.TRISD0
@@ -128,26 +128,6 @@
 #define LED_RE0_SetOpenDrain()       do { ODCONEbits.ODCE0 = 1; } while(0)
 #define LED_RE0_SetAnalogMode()      do { ANSELEbits.ANSELE0 = 1; } while(0)
 #define LED_RE0_SetDigitalMode()     do { ANSELEbits.ANSELE0 = 0; } while(0)
-
-// get/set SW_RE2 aliases
-#define SW_RE2_TRIS                 TRISEbits.TRISE2
-#define SW_RE2_LAT                  LATEbits.LATE2
-#define SW_RE2_PORT                 PORTEbits.RE2
-#define SW_RE2_WPU                  WPUEbits.WPUE2
-#define SW_RE2_OD                   ODCONEbits.ODCE2
-#define SW_RE2_ANS                  ANSELEbits.ANSELE2
-#define SW_RE2_SetHigh()            do { LATEbits.LATE2 = 1; } while(0)
-#define SW_RE2_SetLow()             do { LATEbits.LATE2 = 0; } while(0)
-#define SW_RE2_Toggle()             do { LATEbits.LATE2 = ~LATEbits.LATE2; } while(0)
-#define SW_RE2_GetValue()           PORTEbits.RE2
-#define SW_RE2_SetDigitalInput()    do { TRISEbits.TRISE2 = 1; } while(0)
-#define SW_RE2_SetDigitalOutput()   do { TRISEbits.TRISE2 = 0; } while(0)
-#define SW_RE2_SetPullup()          do { WPUEbits.WPUE2 = 1; } while(0)
-#define SW_RE2_ResetPullup()        do { WPUEbits.WPUE2 = 0; } while(0)
-#define SW_RE2_SetPushPull()        do { ODCONEbits.ODCE2 = 0; } while(0)
-#define SW_RE2_SetOpenDrain()       do { ODCONEbits.ODCE2 = 1; } while(0)
-#define SW_RE2_SetAnalogMode()      do { ANSELEbits.ANSELE2 = 1; } while(0)
-#define SW_RE2_SetDigitalMode()     do { ANSELEbits.ANSELE2 = 0; } while(0)
 
 /**
    @Param

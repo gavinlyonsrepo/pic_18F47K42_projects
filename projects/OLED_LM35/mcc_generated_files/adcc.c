@@ -13,7 +13,7 @@
   @Description
     This source file provides implementations for driver APIs for ADCC.
     Generation Information :
-        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.79.0
+        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
         Device            :  PIC18F47K42
         Driver Version    :  2.1.4
     The generated drivers are tested against the following:
@@ -102,8 +102,8 @@ void ADCC_Initialize(void)
     ADREF = 0x00;
     // ADACT disabled; 
     ADACT = 0x00;
-    // ADCS FOSC/8; 
-    ADCLK = 0x03;
+    // ADCS FOSC/4; 
+    ADCLK = 0x01;
     // ADGO stop; ADFM right; ADON enabled; ADCS FOSC/ADCLK; ADCONT disabled; 
     ADCON0 = 0x84;
     

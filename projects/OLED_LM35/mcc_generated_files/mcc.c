@@ -13,7 +13,7 @@
   @Description:
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
-        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.79.0
+        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
         Device            :  PIC18F47K42
         Driver Version    :  2.00
     The generated drivers are tested against the following:
@@ -49,13 +49,11 @@
 
 void SYSTEM_Initialize(void)
 {
-    INTERRUPT_Initialize();
     PMD_Initialize();
     PIN_MANAGER_Initialize();
     OSCILLATOR_Initialize();
     ADCC_Initialize();
-    TMR0_Initialize();
-    I2C2_Initialize();
+    I2C1_Initialize();
 }
 
 void OSCILLATOR_Initialize(void)
@@ -66,8 +64,8 @@ void OSCILLATOR_Initialize(void)
     OSCCON3 = 0x00;
     // MFOEN disabled; LFOEN disabled; ADOEN disabled; SOSCEN disabled; EXTOEN disabled; HFOEN disabled; 
     OSCEN = 0x00;
-    // HFFRQ 8_MHz; 
-    OSCFRQ = 0x03;
+    // HFFRQ 4_MHz; 
+    OSCFRQ = 0x02;
     // TUN 0; 
     OSCTUNE = 0x00;
 }

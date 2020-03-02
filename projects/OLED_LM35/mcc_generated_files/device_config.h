@@ -13,7 +13,7 @@
   @Description:
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
-        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.79.0
+        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
         Device            :  PIC18F47K42
         Driver Version    :  2.00
     The generated drivers are tested against the following:
@@ -47,7 +47,7 @@
 #ifndef DEVICE_CONFIG_H
 #define	DEVICE_CONFIG_H
 
-#define _XTAL_FREQ 8000000
+#define _XTAL_FREQ 4000000
 
 #endif	/* DEVICE_CONFIG_H */
 /**
