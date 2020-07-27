@@ -29,7 +29,7 @@ Each Project is the relevant sub folder at url link. All code is written in C (x
 | Num | Desc | Link |
 | --- | --- | --- |
 | 1 |  LM35 sensor data displayed on ssd1306 OLED I2C | [URL](projects/OLED_LM35) |
-| 2 |  Security lock based on  keypad password entry | [URL](projects/password) |
-| 3 |  ------- | --------- |
-| 4 |  ------- | --------- |
-
+| 2 |  Security lock featuring LCD, Servo and Keypad. | [URL](projects/password) |
+| 3 |  Nokia 5110 LCD PCD8544 controller library ( ASCII, text only)  | [URL](projects/nokiatext) |
+| 4 |  Nokia 5110 LCD PCD8544 controller library ( Graphics and text )  | [URL](projects/nokiagraphics) |
+| 5 |  ------- | ----------- |
