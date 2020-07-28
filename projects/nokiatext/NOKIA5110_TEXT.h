@@ -63,23 +63,23 @@
 #define LCD_X 84
 #define LCD_Y 48
 
-	// Methods
-	void LCDInit(bool , uint8_t , uint8_t);
-	void LCDgotoXY(uint8_t , uint8_t);
-	void LCDClear(void);
-	void LCDClearBlock(uint8_t);
-	void LCDString(const char *characters);
-	void LCDsetContrast(uint8_t );
-	void LCDenableSleep(void);
-	void LCDdisableSleep(void);
-	void LCDCharacter(char);
-	void LCDWrite(unsigned char , unsigned char);
-    void LCDFont(uint8_t);
-    void LCDSetPixel(uint8_t, uint8_t);
+// Methods
+void LCDInit(bool , uint8_t , uint8_t);
+void LCDgotoXY(uint8_t , uint8_t);
+void LCDClear(void);
+void LCDClearBlock(uint8_t);
+void LCDString(const char *characters);
+void LCDsetContrast(uint8_t );
+void LCDenableSleep(void);
+void LCDdisableSleep(void);
+void LCDCharacter(char);
+void LCDWrite(unsigned char , unsigned char);
+void LCDFont(uint8_t);
+void LCDSetPixel(uint8_t, uint8_t);
 
-	uint8_t  _contrast = LCD_CONTRAST ; 
-	uint8_t	_FontNumber = LCD_FONTNUMBER;
-	bool	_sleep;
-	bool	_inverse;
+uint8_t  _contrast = LCD_CONTRAST ; 
+uint8_t	_FontNumber = LCD_FONTNUMBER;
+bool	_sleep;
+bool	_inverse;
 
 #endif

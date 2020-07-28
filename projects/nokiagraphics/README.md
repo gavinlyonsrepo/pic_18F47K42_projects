@@ -16,7 +16,7 @@ Overview
 * PIC: PIC18F47K42
 * IDE:  MPLAB X v5.30
 
-ASCII text Version
+ASCII text version
 --------------------
 
 1. ASCII text ONLY version of this library with fonts and features. light-weight. [PIC18F47K42](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/tree/master/projects/nokiatext) 
@@ -30,17 +30,15 @@ It uses the PCD8544 controller, which is the same used in the Nokia 3310 LCD.
 The PCD8544 is a low power CMOS LCD controller/driver, designed to drive a graphic display of 48 rows and 84 columns. 
 All necessary functions for the display are provided in a single chip, including on-chip generation of LCD supply and bias voltages, 
 resulting in a minimum of external components and low power consumption. 
-The PCD8544 interfaces to microcontrollers through a serial bus interface(SPI).
-I did not use the MCC or the in-built SPI hardware for this library,
-it uses bit banging/software SPI. 
+The PCD8544 interfaces to microcontrollers through a serial bus interface(SPI). 
 
-GPIO function on PIC, 5 Nokia 5110 LCD lines SPI bus
+GPIO function on PIC, 5 Nokia 5110 LCD lines SPI bus(software SPI)
 
-| Pic 16F1619 pin  | Nokia 5110 LCD |
+| PiIC 9 pin  | Nokia 5110 LCD |
 | ------ | ------ |
-| RC1 | LCD_CLK Pin 5 clock in |
-| RC2 | LCD_DIN Pin 4 data in |
-| RC3 | LCD_DC Pin 3 data/command|
+| RB1 | LCD_CLK Pin 5 clock in |
+| RB2 | LCD_DIN Pin 4 data in |
+| RB3 | LCD_DC Pin 3 data/command|
 | RB4 | LCD_CE Pin 2 chip enable |
 | RB5 | LCD_RST Pin 1 reset|
 
