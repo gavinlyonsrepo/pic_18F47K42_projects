@@ -3,7 +3,7 @@ Table of contents
 ---------------------------
 
   * [Overview](#overview)
-  * [ASCII Versions text](#ascii-versions-text)
+  * [ASCII text version](#ascii-version-text)
   * [Features](#features)
   * [Output](#output)
   
@@ -14,17 +14,12 @@ Overview
 * Author: Gavin Lyons.
 * Complier: xc8 v2.10 compiler
 * PIC: PIC18F47K42
-* IDE:  MPLAB X v5.00
+* IDE:  MPLAB X v5.30
 
-ASCII text Versions
+ASCII text Version
 --------------------
 
-1. Basic ASCII Text only for the [PIC16F1619](https://github.com/gavinlyonsrepo/pic_16F1619_projects). 
-
-2. Different ASCII text version of library one for [PIC18F47K42](https://github.com/gavinlyonsrepo/pic_18F47K42_projects) with more fonts and features. 
-
-3. Arduino: Library number two was forked to arduino and is in the arduino [library manager](https://github.com/gavinlyonsrepo/NOKIA5110_TEXT)
-
+1. ASCII text ONLY version of this library with fonts and features. light-weight. [PIC18F47K42](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/tree/master/projects/nokiatext) 
 
 Features
 ----------------------
@@ -52,19 +47,30 @@ GPIO function on PIC, 5 Nokia 5110 LCD lines SPI bus
 Connect Nokia 5110 VCC(pin 6)to 3.3V.
 The user may have to adjust LCD contrast and bias settings,
 to the screen at hand for optimal display.
+Run the PIC at 3.3V,  If run at 5V drop voltage on control lines to 3.3V.
 These settings are in the LCDinit function.
 A resistor or potentiometer can be connected between (Nokia LCD) GND(pin8) and LIGHT(pin7) to switch on backlight
 and adjust it. 
 
 The library has 5 files (main.c, nokia.c, nokia.h, graphics.h, graphics.c).
+It is a fork of an Arduino library in the library manager.
 
-The main.c  contains the demostartion functions and a test loop. 
+The main.c contains the demo functions in a test loop showing features of library. 
 
 [Nokia 5110 LCD dataSheet ](https://www.sparkfun.com/datasheets/LCD/Monochrome/Nokia5110.pdf)
 
 ![PICTURE](https://github.com/gavinlyonsrepo/pic_16F1619_projects/blob/master/images/NOKIA2.jpg)
 
+Memory usage: 
+
+1. Program space used 23976 bytes 18.3%)
+2. Data space    used 703 bytes (8.6%)
+
 Output
 ------------------------
+
+1. Bitmap Initials
+2. Text Font
+3. Shapes
 
 ![OUTPUT](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/blob/master/images/nokiagraph1.jpg)
