@@ -57,6 +57,8 @@ void display(void);
 void display_clear(void);
 void fillScreen(void);
 void invertDisplay(bool inv);
+void LCDenableSleep(void);
+void LCDdisableSleep(void);
 
 /* ------------- Non User Functions --------- */
 void PCD8544_SPI_Write(uint8_t d);
@@ -64,7 +66,9 @@ void writeCommand(uint8_t c);
 
 /* ----------- Variables --------- */
 #define pcd8544_swap(a, b) { uint8_t t = a; a = b; b = t; }
+
 uint8_t _width, _height, rotation;
+bool	_sleep;
 
 // Memory buffer for the LCD : GL in sig
 uint8_t pcd8544_buffer[LCDWIDTH * LCDHEIGHT / 8] = {

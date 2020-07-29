@@ -3,7 +3,6 @@ Table of contents
 ---------------------------
 
   * [Overview](#overview)
-  * [ASCII text version](#ascii-version-text)
   * [Features](#features)
   * [Output](#output)
   
@@ -15,11 +14,9 @@ Overview
 * Complier: xc8 v2.10 compiler
 * PIC: PIC18F47K42
 * IDE:  MPLAB X v5.30
+* ASCII Text only Version of this library with fonts and features. light-weight. [PIC18F47K42](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/tree/master/projects/nokiatext)
 
-ASCII text version
---------------------
-
-1. ASCII text ONLY version of this library with fonts and features. light-weight. [PIC18F47K42](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/tree/master/projects/nokiatext) 
+ 
 
 Features
 ----------------------
@@ -34,7 +31,7 @@ The PCD8544 interfaces to microcontrollers through a serial bus interface(SPI).
 
 GPIO function on PIC, 5 Nokia 5110 LCD lines SPI bus(software SPI)
 
-| PiIC 9 pin  | Nokia 5110 LCD |
+| PIC pin  | Nokia 5110 LCD |
 | ------ | ------ |
 | RB1 | LCD_CLK Pin 5 clock in |
 | RB2 | LCD_DIN Pin 4 data in |

@@ -44,7 +44,6 @@ void display_drawTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, ui
 void display_fillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
 void display_drawRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint16_t color);
 void display_fillRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint16_t color);
-
 void display_setCursor(uint16_t x, uint16_t y);
 void display_setTextColor(uint16_t c, uint16_t bg);
 void display_setTextSize(uint8_t s);
@@ -60,19 +59,14 @@ uint16_t getCursorX(void);
 uint16_t getCursorY(void);
 uint16_t display_getWidth();
 uint16_t display_getHeight();
-uint16_t display_color565(uint8_t red, uint8_t green, uint8_t blue);
 
-void display_drawBitmapV1   (uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color);
-void display_drawBitmapV1_bg(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color, uint16_t bg);
 void display_drawBitmapV2   (uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color);
-void display_drawBitmapV2_bg(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color, uint16_t bg);
 
 /* -------------- Non User Functions ------------------- */
 void writeLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
 uint8_t printNumber(uint32_t n, int8_t n_width, uint8_t _flags);
 void printFloat(float float_n, int8_t f_width, int8_t decimal, uint8_t _flags);
 void v_printf(const char *fmt, va_list arp);
-
 
 /*----------- Variables ---------*/
 #ifndef min

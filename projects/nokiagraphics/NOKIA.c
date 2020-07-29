@@ -243,4 +243,23 @@ void invertDisplay(bool inv) {
     writeCommand(LCD_DISPLAYCONTROL | LCD_DISPLAYNORMAL);
 }
 
+
+void LCDenableSleep(void)
+{
+    _sleep = true;
+    writeCommand(LCD_FUNCTIONSET |  LCD_POWERDOWN);
+}
+
+void LCDdisableSleep(void)
+{
+    _sleep = false;
+      // get into the EXTENDED mode
+  writeCommand(LCD_FUNCTIONSET | LCD_EXTENDEDINSTRUCTION );
+  writeCommand(LCD_SETBIAS | 0x03);   // set bias voltage
+  writeCommand( LCD_SETVOP | 0x32);   // set contrast
+  writeCommand(LCD_FUNCTIONSET);   // normal mode
+  // set display to normal mode
+  writeCommand(LCD_DISPLAYCONTROL | LCD_DISPLAYNORMAL);
+}
+
 /* ------------------------ EOF --------------------------- */

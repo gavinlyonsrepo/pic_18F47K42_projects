@@ -70,7 +70,6 @@ void writeLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t colo
     Parameter4:    y1  End point y coordinate
     Parameter5:    color 16-bit 5-6-5 Color to draw with
 */
-
 void display_drawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color) {
     // Update in subclasses if desired!
     if(x0 == x1){
@@ -587,7 +586,6 @@ void display_setTextColor(uint16_t c, uint16_t b) {
     Function Desc:     Whether text that is too long should 'wrap' around to the next line.
     Parameter1:  w Set true for wrapping, false for clipping
 */
-
 void display_setTextWrap(bool w) {
     wrap = w;
 }
@@ -596,7 +594,6 @@ void display_setTextWrap(bool w) {
     Function Desc:     Get rotation setting for display
     Returns:   0 thru 3 corresponding to 4 cardinal rotations
 */
-
 uint8_t display_getRotation(void) {
     return rotation;
 }
@@ -615,69 +612,6 @@ uint16_t display_getWidth(void) {
 */
 uint16_t display_getHeight(void) {
     return display_height;
-}
-
-/*
-    Function Desc:  Given 8-bit red, green and blue values, return a 'packed'
-             16-bit color value in '565' RGB format (5 bits red, 6 bits
-             green, 5 bits blue). This is just a mathematical operation,
-             no hardware is touched.
-    Parameter1:   red    8-bit red brightnesss (0 = off, 255 = max).
-    Parameter2:   green  8-bit green brightnesss (0 = off, 255 = max).
-    Parameter3:   blue   8-bit blue brightnesss (0 = off, 255 = max).
-    returns: 'Packed' 16-bit color value (565 format).
-*/
-uint16_t display_color565(uint8_t red, uint8_t green, uint8_t blue) {
-    return ((uint16_t)(red & 0xF8) << 8) | ((uint16_t)(green & 0xFC) << 3) | (blue >> 3);
-}
-
-/*
-   Function Desc:    Draw a ROM-resident 1-bit image at the specified (x,y) position,
-              using the specified foreground color (unset bits are transparent).
-    Parameter1:    x   Top left corner x coordinate
-    Parameter2:    y   Top left corner y coordinate
-    Parameter3:    bitmap  byte array with monochrome bitmap
-    Parameter4:    w   Width of bitmap in pixels
-    Parameter5:    h   Hieght of bitmap in pixels
-    Parameter6:    color 16-bit 5-6-5 Color to draw with
-*/
-void display_drawBitmapV1(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h,
-     uint16_t color) {
-  uint16_t i, j;
-  for( i = 0; i < h/8; i++)
-  {    
-    for( j = 0; j < w * 8; j++)
-    {      
-      if( bitmap[j/8 + i*w] & (1 << (j % 8)) )
-        display_drawPixel(x + j/8, y + i*8 + (j % 8), color);
-    }
-  }
-}
-
-/*
-   Function Desc:    Draw a ROM-resident 1-bit image at the specified (x,y) position,
-              using the specified foreground (for set bits) and background (unset bits) colors.
-    Parameter1:    x   Top left corner x coordinate
-    Parameter2:    y   Top left corner y coordinate
-    Parameter3:    bitmap  byte array with monochrome bitmap
-    Parameter4:    w   Width of bitmap in pixels
-    Parameter5:    h   Hieght of bitmap in pixels
-    Parameter6:    color 16-bit 5-6-5 Color to draw pixels with
-    Parameter7:    bg 16-bit 5-6-5 Color to draw background with
-*/
-void display_drawBitmapV1_bg(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h,
-     uint16_t color, uint16_t bg) {
-  uint16_t i, j;
-  for( i = 0; i < h/8; i++)
-  {    
-    for( j = 0; j < w * 8; j++)
-    {      
-      if( bitmap[j/8 + i*w] & (1 << (j % 8)) )
-        display_drawPixel(x + j/8, y + i*8 + (j % 8), color);
-      else
-        display_drawPixel(x + j/8, y + i*8 + (j % 8), bg);
-    }
-  }
 }
 
 /*
@@ -703,36 +637,6 @@ void display_drawBitmapV2(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_
             else      _byte   = bitmap[j * byteWidth + i / 8];
             if(_byte & 0x80)
               display_drawPixel(x+i, y, color);
-        }
-    }
-}
-
-
-/*
-   Function Desc:    Draw a ROM-resident 1-bit image at the specified (x,y) position,
-              using the specified foreground (for set bits) and background (unset bits) colors.
-    Parameter1:    x   Top left corner x coordinate
-    Parameter2:    y   Top left corner y coordinate
-    Parameter3:    bitmap  byte array with monochrome bitmap
-    Parameter4:    w   Width of bitmap in pixels
-    Parameter5:    h   Hieght of bitmap in pixels
-    Parameter6:    color 16-bit 5-6-5 Color to draw pixels with
-    Parameter7:    bg 16-bit 5-6-5 Color to draw background with
-*/
-void display_drawBitmapV2_bg(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h,
-  uint16_t color, uint16_t bg) {
-
-    uint16_t byteWidth = (w + 7) / 8; // Bitmap scanline pad = whole byte
-    uint8_t _byte = 0;
-    uint16_t i, j;
-    for(j = 0; j < h; j++, y++) {
-        for(i = 0; i < w; i++ ) {
-            if(i & 7) _byte <<= 1;
-            else      _byte   = bitmap[j * byteWidth + i / 8];
-            if(_byte & 0x80)
-              display_drawPixel(x+i, y, color);
-            else
-              display_drawPixel(x+i, y, bg);
         }
     }
 }
@@ -878,6 +782,7 @@ void display_printf(const char *fmt, ...) {
   va_list arg;
   va_start(arg, fmt);
   v_printf(fmt, arg);
+  //va_end(arg);
 }
 
 /* ------------- EOF -------------------- */

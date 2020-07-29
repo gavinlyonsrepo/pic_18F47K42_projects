@@ -55,6 +55,7 @@ const uint8_t Flake_bmp[] =
 /* -------- Function prototypes -------- */
 void Setup(void);
 void DisplayData(void);
+void DisplayDataOne(void);
 void testdrawcircle(void);
 void testdrawline(void);
 void testdrawchar(void);
@@ -73,9 +74,23 @@ void main(void)
 	while (1)
 	{
 		DisplayData();
+        //DisplayDataOne(); // sleep test comment in to test
 	}
 }
 /* ------------------ End of main ------------ */
+
+void DisplayDataOne(void)
+{
+  display_clear();
+  LED_STATUS_RA0_SetLow();
+  testdrawchar();
+  display();
+   __delay_ms(5000);
+   LCDenableSleep();
+  __delay_ms(5000);
+  LCDdisableSleep();
+  
+}
 
 // Initialize the device
 void  Setup(void)
