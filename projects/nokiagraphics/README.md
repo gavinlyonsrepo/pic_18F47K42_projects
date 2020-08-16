@@ -14,7 +14,7 @@ Overview
 * Complier: xc8 v2.10 compiler
 * PIC: PIC18F47K42
 * IDE:  MPLAB X v5.30
-* ASCII Text only Version of this library with fonts and features. light-weight. [PIC18F47K42](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/tree/master/projects/nokiatext)
+* Note; There is ASCII Text only Version of this library with fonts and features, here: . [PIC18F47K42](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/tree/master/projects/nokiatext)
 
  
 

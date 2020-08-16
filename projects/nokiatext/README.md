@@ -106,15 +106,6 @@ For example with "default" is a 5x8 pixel font with the two blank spaces is 7x8 
 So (84/7) = 12 characters across columns. 
 There are (48/8) = 6 row blocks that gives (12 x 06) = 72 characters in total.
 
-**Font 1 default**
-
-![ default  font ](https://github.com/gavinlyonsrepo/NOKIA5110_TEXT/blob/master/extras/image/NOKIA_FONT1.jpg)
-
-**All Fonts**
- 
-Output showing all 6 fonts, 1-6, one font in each row block:
-
-![all font](https://github.com/gavinlyonsrepo/NOKIA5110_TEXT/blob/master/extras/image/NOKIA_FONT_ALL.jpg)
 
 Memory
 ---------------------------
@@ -135,6 +126,6 @@ Results of when main.c test demo file is complied.
 Other Versions
 -------------------------------------
 
-1. Arduino: This library was forked to arduino it is in the arduino [library manager](https://github.com/gavinlyonsrepo/NOKIA5110_TEXT)
+1. Arduino: This library was forked to arduino it is in the arduino, this library is now a few versions behind arduino library [library manager](https://github.com/gavinlyonsrepo/NOKIA5110_TEXT)
 
 2. Graphics version of this library for the [PIC18F47K42](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/tree/master/projects/nokiagraphics) 
