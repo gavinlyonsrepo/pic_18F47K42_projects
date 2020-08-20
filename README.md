@@ -28,7 +28,7 @@ Each Project is the relevant sub folder at url link. All code is written in C (x
 
 | Num | Desc | Link |
 | --- | --- | --- |
-| 1 |  ssd1306 OLED I2C ASCII test library, LM35 sensor | [URL](projects/OLED_LM35) |
+| 1 |  SSD1306 OLED I2C ASCII text library, LM35 sensor | [URL](projects/OLED_LM35) |
 | 2 |  Security lock featuring LCD, Servo and Keypad. | [URL](projects/password) |
 | 3 |  Nokia 5110 LCD PCD8544 controller library ( ASCII, text only)  | [URL](projects/nokiatext) |
 | 4 |  Nokia 5110 LCD PCD8544 controller library ( Graphics and text )  | [URL](projects/nokiagraphics) |
