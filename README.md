@@ -1,28 +1,17 @@
-
-
-Table of contents
----------------------------
-
-  * [Table of contents](#table-of-contents)
-  * [Overview](#overview)
-  * [Project List](#project-list)
-
-
 Overview
 --------------------------------------------
 * Name: pic_18F47K42_projects
-* Description: A set of projects and example code for a **Microchip** 
+* Description: A set of projects and libraries for a **Microchip** 
  PIC 18F47K42 Micro-controller.
 * Author: Gavin Lyons 
 * Mail: glyons66@hotmail.com
 * Copyright: (C) 2020 Gavin Lyons GNU GPL. see LICENSE.md in documentation section
 
-
 Project List
 -----------------------------------------
-A set of Projects and example code for the 40-pin, 8-bit PIC 18F47K42 Microcontroller,
+A set of projects and libraries  for the 40-pin, 8-bit PIC 18F47K42 Microcontroller,
 made by *Microchip*.  
-Each Project is the relevant sub folder at url link. All code is written in C (xc8 compiler)
+Each project is the relevant sub folder at url link. All code is written in C (xc8 compiler)
 
 **Project List:**
 
@@ -32,4 +21,4 @@ Each Project is the relevant sub folder at url link. All code is written in C (x
 | 2 |  Security lock featuring LCD, Servo and Keypad. | [URL](projects/password) |
 | 3 |  Nokia 5110 LCD PCD8544 controller library ( ASCII, text only)  | [URL](projects/nokiatext) |
 | 4 |  Nokia 5110 LCD PCD8544 controller library ( Graphics and text )  | [URL](projects/nokiagraphics) |
-| 5 |  ------- | ----------- |
+| 5 |  ------- | -------- |
