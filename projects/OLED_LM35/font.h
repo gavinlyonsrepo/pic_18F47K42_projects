@@ -1,8 +1,10 @@
 /*
-* Project Name: font.
 * File: font.h
-* Description: font 8*5 pixel Ascii font needs another byte between character.
+* Description: font 5*8 pixel ASCII font needs another byte between character.
 * used in Oled I2C project
+* Author: Gavin Lyons.
+* Created March 2019
+* URL: https://github.com/gavinlyonsrepo
 */
 
 #ifndef font_H

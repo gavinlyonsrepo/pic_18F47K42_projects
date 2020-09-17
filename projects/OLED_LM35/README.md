@@ -10,14 +10,6 @@ Overview
 * PIC: PIC18F47K42
 * IDE:  MPLAB X v5.30
 
-
-Table of contents
----------------------------
-
-  * [Overview](#overview)
-  * [Features](#features)
-  * [Output](#output)
-  
 Features
 ----------------------
 
@@ -29,7 +21,7 @@ and a font.h file that contains an ASCII pixelfont.
 
 **Connections**
 
-1. RD0 = LM35 Sensor line input.
+1. RD0 = LM35 Sensor line analog input.
 2. RE2 = Status LED, toggles every sensor refresh. 
 3. RC4 = SDA OLED
 4. RC3 = SCLK OLED
@@ -39,11 +31,13 @@ and a font.h file that contains an ASCII pixelfont.
 The SSD1306 OLED display communicates with the master device over I2C mode.
 It is controlled via the two pin I2C bus. Both pins must be held logic high by pull-up resistors. 
 
-The ASCII based font file is a called "font.h". 
-This library turns the OLED into a character 21x04 based screen.
+The ASCII based font file is a called "font.h".  The font is 5 x 8 with two blank vertical bytes added for padding 
+ so in effect a 7 x 8 size font . The screen is 128 by 64 so it's 128/7 by  64/8 or 18 by 08.
+This library turns the OLED into a character 18x08 based screen.
+Total characters = 144.
 There are no graphics in library and one font. 
 Will also work on a  OLED 128 by 32 SSD1306, as well with one modification to library.
-( comment in/out a block of marked code at top of oled.h).
+( comment in/out a define at top of header file.).
 
 **LM35**
 

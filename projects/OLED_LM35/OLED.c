@@ -58,10 +58,20 @@ void Oled_Init(void)
   Oled_Command(0x00);  //Hor Addressing Mode is Used (02 is Ver)
   Oled_Command( SSD1306_SET_SEGMENT_REMAP| 0x01);
   Oled_Command( SSD1306_COM_SCAN_DIR_DEC );
+  
+  #if defined SSD1306_128_32
+  ssd1306_command( SSD1306_SET_COM_PINS );
+  ssd1306_command( 0x02 );
+  ssd1306_command( SSD1306_SET_CONTRAST_CONTROL );
+  ssd1306_command(0x8F);
+
+#elif defined SSD1306_128_64
   Oled_Command( SSD1306_SET_COM_PINS );
-  Oled_Command( 0x02 );
+  Oled_Command( 0x12 );
   Oled_Command( SSD1306_SET_CONTRAST_CONTROL );
-  Oled_Command(0x8F);
+  Oled_Command(0xCF);   // ssd1306_command(0x9F);  Use with External VCC
+#endif
+
   Oled_Command( SSD1306_SET_PRECHARGE_PERIOD );
   Oled_Command( 0xF1 );
   Oled_Command( SSD1306_SET_VCOM_DESELECT );
@@ -81,8 +91,9 @@ void Oled_WriteString(char *characters)
 //function to write a character, passed character
 void Oled_WriteCharacter(char character)
 {
-  for (int i=0; i<5; i++) Oled_Data((ASCII[character - 0x20][i]));
-  Oled_Data(0x00);
+  Oled_Data(0x00); // padding LHS
+  for (uint8_t i=0; i< FONT_ONE_WIDTH; i++) Oled_Data((ASCII[character - ASCII_OFFSET][i]));
+  Oled_Data(0x00); // padding RHS 
 }
 
 void Oled_SetContrast( uint8_t contrast )
@@ -94,12 +105,12 @@ void Oled_SetContrast( uint8_t contrast )
 //function to clear OLED by writing to it.
 void Oled_Clear(void)
 {
-  int i =0;
-    // OLED 128* 32 pixels = total pixels -> (4096 / 1 byte) = 512 passes.
+  uint16_t i =0;
+    // OLED 128* 32 pixels = total pixels -> (4096 bits / 1 byte) = 512 passes.
     // SSD1306_CLEAR_SIZE  = 512 for 128* 32 or 1024  for 128*64
     for (i; i<SSD1306_CLEAR_SIZE ; i++) 
     {
-      Oled_Data(0x00); // clear oled screen  
+      Oled_Data(0x00); // clear OLED screen  
     }
 }
 
@@ -107,9 +118,9 @@ void Oled_Clear(void)
 void Oled_ClearLine(uint8_t page_num)
 {
     Oled_SelectPage(page_num);
-    int i =0;
+    uint8_t i =0;
   // Clear line of 128 pixels of current page
-    for (i; i<128 ; i++) 
+    for (i; i< SSD1306_LCDWIDTH  ; i++) 
     {
       Oled_Data(0x00); // clear oled screen  
     }
