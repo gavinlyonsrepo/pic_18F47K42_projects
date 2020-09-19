@@ -4,5 +4,7 @@
     * repository created
 
 ### July 2020
-	* Added projects 3 and 4, Nokia 5110 libraries.
+	* Added Nokia 5110 libraries.
 	
+### September 2020
+	* Added I2C OLED SSD1306 graphics library.
