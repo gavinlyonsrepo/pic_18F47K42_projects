@@ -123,6 +123,6 @@ Results of when main.c test demo file is complied.
 Other Versions
 -------------------------------------
 
-1. Arduino: This library was forked to arduino it is in the arduino [library manager](https://github.com/gavinlyonsrepo/NOKIA5110_TEXT) , this library is now a few versions behind the Arduino library. 
+1. Arduino: This library was forked to arduino it is in the arduino [library manager](https://github.com/gavinlyonsrepo/NOKIA5110_TEXT)  
 
 2. Graphics  library for the NOKIA 5110 XC8 PIC [PIC18F47K42](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/tree/master/projects/nokiagraphics) 

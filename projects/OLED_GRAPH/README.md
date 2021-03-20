@@ -14,7 +14,7 @@ Features
 
 The I2C code and pin config generated using the MPLAB Code Configurator is in a folder called mcc_generated_files. 
 There is  an OLED library in files (SSD1306OLED.c and SSD1306OLED.h),
-and a TextFonts.h file that contains three ASCII pixel fonts and a optional bitmap image(used to test image function.
+and a TextFonts.h file that contains three ASCII pixel fonts and an optional bitmap image(used to test image) function.
 Main.c  contains a list of basic test routines to test library. 
 
 1. RE2 = Status LED. optional.
@@ -26,7 +26,7 @@ It is controlled via the two pin I2C bus. Both pins must be held logic high by p
 
 The library can  display Graphics, text and bitmaps.
 
- Will also work on a  OLED (128 by 32) & (96 by 16) SSD1306, as well with one modification to library.
+ Will also work on a  OLED (128 by 32) & (96 by 16) SSD1306 as well, with one modification to library.
 ( comment in/out a define at top of header file.). 
 
 **Fonts** 

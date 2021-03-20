@@ -60,10 +60,10 @@ void Oled_Init(void)
   Oled_Command( SSD1306_COM_SCAN_DIR_DEC );
   
   #if defined SSD1306_128_32
-  Oled_command( SSD1306_SET_COM_PINS );
-  Oled_command( 0x02 );
-  Oled_command( SSD1306_SET_CONTRAST_CONTROL );
-  Oled_command(0x8F);
+  Oled_Command( SSD1306_SET_COM_PINS );
+  Oled_Command( 0x02 );
+  Oled_Command( SSD1306_SET_CONTRAST_CONTROL );
+  Oled_Command(0x8F);
 
 #elif defined SSD1306_128_64
   Oled_Command( SSD1306_SET_COM_PINS );
