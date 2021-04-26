@@ -4,7 +4,7 @@ Overview
 * Description: A set of projects and libraries for a **Microchip** 
  PIC 18F47K42 Micro-controller.
 * Author: Gavin Lyons 
-* Copyright: (C) 2020 Gavin Lyons GNU GPL. see LICENSE.md in documentation section
+* Copyright: (C) 2020 Gavin Lyons, MIT. see LICENSE.md in documentation section
 
 Project List
 -----------------------------------------
