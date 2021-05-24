@@ -15,8 +15,7 @@
 #include "NOKIA.h"
 
 /* 
-   FunctionName : LCD_begin
-   Function Desc:  This sends the  commands to the PCD8544 to  init LCD, Note Software SPI
+   Desc:  This sends the  commands to the PCD8544 to  init LCD, Note Software SPI
 */
 void LCD_begin(void) {
     __delay_ms(100);
@@ -44,9 +43,8 @@ void LCD_begin(void) {
 }
 
 /* 
-   FunctionName : PCD8544_SPI_Write
-   Function Desc:  Writes a byte to the PCD8544
-   Parameter: data byte will be sent as command or data depending on status of DC line
+   Desc:  Writes a byte to the PCD8544
+   Param: data byte will be sent as command or data depending on status of DC line
 */
 void PCD8544_SPI_Write(uint8_t d) {
   uint8_t bit_n;
@@ -59,9 +57,8 @@ void PCD8544_SPI_Write(uint8_t d) {
 }
 
 /* 
-   FunctionName : writeCommand 
-   Function Desc:  Writes a command byte to the PCD8544
-   Parameter1: command There are two  banks in the LCD, data and commands. This
+   Desc:  Writes a command byte to the PCD8544
+   Param1: command There are two  banks in the LCD, data and commands. This
     function sets the DC low then sends
     the command byte if it(DC) was high it would be a data byte
 */
@@ -73,9 +70,8 @@ void writeCommand(uint8_t command) {
 }
 
 /* 
- FunctionName: display_setContrast
- FunctionDesc: Function to set contrast passed a byte 
- Parameter: con, Set LCD VOP Contrast, range = ((0x00-0x7F) |0x80) 0xB5 = (0x35|0x80) try 32 - 3F possible inputs. 
+ Desc: Function to set contrast passed a byte 
+ Param: con, Set LCD VOP Contrast, range = ((0x00-0x7F) |0x80) 0xB5 = (0x35|0x80) try 32 - 3F possible inputs. 
  */
 void display_setContrast(uint8_t con) {
   if (con > 0x7f)
@@ -87,8 +83,7 @@ void display_setContrast(uint8_t con) {
  }
 
 /* 
- FunctionName: display
- FunctionDesc: Writes the buffer to the LCD
+ Desc: Writes the buffer to the LCD
  */
 void display(void) {
   uint16_t i;
@@ -106,8 +101,7 @@ void display(void) {
 
 
 /* 
- FunctionName: drawPixel
- FunctionDesc: The most basic function, set a single pixel
+ Desc: The most basic function, set a single pixel
  */
 void drawPixel(uint8_t x, uint8_t y, bool color) {
 
@@ -186,7 +180,6 @@ void drawVLine(uint8_t x, uint8_t y, uint8_t h, bool color) {
   drawLine(x, y, x, y + h - 1, color);
 }
 
-/* FunctionName: fillRect */
 void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, bool color) {
   uint8_t i;
   for (i = x; i < x + w; i++)
@@ -194,8 +187,7 @@ void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, bool color) {
 }
 
 /* 
- FunctionName: display_clear
- FunctionDesc: Writes the buffer (full of zeros) to the LCD
+ Desc: Writes the buffer (full of zeros) to the LCD
  */
 void display_clear(void) {
   uint16_t i;
@@ -204,8 +196,7 @@ void display_clear(void) {
 }
 
 /* 
- FunctionName: display_clear
- FunctionDesc: Writes the buffer (full of ones(0xFF)) to the LCD
+ Desc: Writes the buffer (full of ones(0xFF)) to the LCD
  */
 void fillScreen() {
   uint16_t i;
@@ -214,9 +205,8 @@ void fillScreen() {
 }
 
 /* 
- FunctionName: setRotation
- FunctionDesc:  set rotation setting for display,
- Parameter1:  0 thru 3 corresponding to 4 cardinal rotations:
+ Desc:  set rotation setting for display,
+ Param1:  0 thru 3 corresponding to 4 cardinal rotations:
  */
 void setRotation(uint8_t m) {
   rotation = (m & 3);
@@ -235,7 +225,6 @@ void setRotation(uint8_t m) {
   }
 }
 
-/*  FunctionName: InvertDisplay */
 void invertDisplay(bool inv) {
   if(inv == 1)
     writeCommand(LCD_DISPLAYCONTROL | LCD_DISPLAYINVERTED);

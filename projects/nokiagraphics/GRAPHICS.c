@@ -16,13 +16,13 @@
 /*
     Name:         writeLine
     Function Desc:   Write a line.  Bresenham's algorithm 
-    Parameter1:    x0  Start point x coordinate
-    Parameter2:    y0  Start point y coordinate
-    Parameter3:    x1  End point x coordinate
-    Parameter4:    y1  End point y coordinate
-    Parameter5:    color 16-bit 5-6-5 Color to draw with
+    Param1:    x0  Start point x coordinate
+    Param2:    y0  Start point y coordinate
+    Param3:    x1  End point x coordinate
+    Param4:    y1  End point y coordinate
+    Param5:    color 
 */
-void writeLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color) {
+void writeLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint8_t color) {
     bool steep = abs((int16_t)(y1 - y0)) > abs((int16_t)(x1 - x0));
     int16_t dx, dy, err, ystep;
     if (steep) {
@@ -64,13 +64,13 @@ void writeLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t colo
 
 /*
    Function Desc:   Draw a line
-    Parameter1:    x0  Start point x coordinate
-    Parameter2:    y0  Start point y coordinate
-    Parameter3:    x1  End point x coordinate
-    Parameter4:    y1  End point y coordinate
-    Parameter5:    color 16-bit 5-6-5 Color to draw with
+    Param1:    x0  Start point x coordinate
+    Param2:    y0  Start point y coordinate
+    Param3:    x1  End point x coordinate
+    Param4:    y1  End point y coordinate
+    Param5:    color 
 */
-void display_drawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color) {
+void display_drawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint8_t color) {
     // Update in subclasses if desired!
     if(x0 == x1){
         if(y0 > y1) _swap_int16_t(y0, y1);
@@ -86,12 +86,12 @@ void display_drawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16
 
 /*
    Function Desc:   Draw a circle outline
-    Parameter1:    x0   Center-point x coordinate
-    Parameter2:    y0   Center-point y coordinate
-    Parameter3:    r   Radius of circle
-    Parameter4:    color 16-bit 5-6-5 Color to draw with
+    Param1:    x0   Center-point x coordinate
+    Param2:    y0   Center-point y coordinate
+    Param3:    r   Radius of circle
+    Param4:    color
 */
-void display_drawCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color) {
+void display_drawCircle(uint16_t x0, uint16_t y0, uint16_t r, uint8_t color) {
     int16_t f = 1 - r;
     int16_t ddF_x = 1;
     int16_t ddF_y = -2 * r;
@@ -127,14 +127,14 @@ void display_drawCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color) {
 
 /*
     Function Desc:   Quarter-circle drawer, used to do circles and roundrects
-    Parameter1:    x0   Center-point x coordinate
-    Parameter2:    y0   Center-point y coordinate
-    Parameter3:    r   Radius of circle
-    Parameter4:    cornername  Mask bit #1 or bit #2 to indicate which quarters of the circle we're doing
-    Parameter5:    color 16-bit 5-6-5 Color to draw with
+    Param1:    x0   Center-point x coordinate
+    Param2:    y0   Center-point y coordinate
+    Param3:    r   Radius of circle
+    Param4:    cornername  Mask bit #1 or bit #2 to indicate which quarters of the circle we're doing
+    Param5:    color
 */
 
-void display_drawCircleHelper(uint16_t x0, uint16_t y0, uint16_t r, uint8_t cornername, uint16_t color) {
+void display_drawCircleHelper(uint16_t x0, uint16_t y0, uint16_t r, uint8_t cornername, uint8_t color) {
     int16_t f     = 1 - r;
     int16_t ddF_x = 1;
     int16_t ddF_y = -2 * r;
@@ -172,12 +172,12 @@ void display_drawCircleHelper(uint16_t x0, uint16_t y0, uint16_t r, uint8_t corn
 
 /*
    Function Desc:   Draw a circle with filled color
-    Parameter1:    x0   Center-point x coordinate
-    Parameter2:    y0   Center-point y coordinate
-    Parameter3:    r   Radius of circle
-    Parameter4:    color 16-bit 5-6-5 Color to fill with
+    Param1:    x0   Center-point x coordinate
+    Param2:    y0   Center-point y coordinate
+    Param3:    r   Radius of circle
+    Param4:    color 
 */
-void display_fillCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color) {
+void display_fillCircle(uint16_t x0, uint16_t y0, uint16_t r, uint8_t color) {
     display_drawVLine(x0, y0-r, 2*r+1, color);
     display_fillCircleHelper(x0, y0, r, 3, 0, color);
 }
@@ -186,14 +186,14 @@ void display_fillCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color) {
 
 /*
     Function Desc: Quarter-circle drawer with fill, used for circles and roundrects
-    Parameter1:  x0       Center-point x coordinate
-    Parameter2:  y0       Center-point y coordinate
-    Parameter3:  r        Radius of circle
-    Parameter4:  corners  Mask bits indicating which quarters we're doing
-    Parameter5:  delta    Offset from center-point, used for round-rects
-    Parameter6:  color    16-bit 5-6-5 Color to fill with
+    Param1:  x0       Center-point x coordinate
+    Param2:  y0       Center-point y coordinate
+    Param3:  r        Radius of circle
+    Param4:  corners  Mask bits indicating which quarters we're doing
+    Param5:  delta    Offset from center-point, used for round-rects
+    Param6:  color    
 */
-void display_fillCircleHelper(uint16_t x0, uint16_t y0, uint16_t r, uint8_t corners, uint16_t delta, uint16_t color) {
+void display_fillCircleHelper(uint16_t x0, uint16_t y0, uint16_t r, uint8_t corners, uint16_t delta, uint8_t color) {
     int16_t f     = 1 - r;
     int16_t ddF_x = 1;
     int16_t ddF_y = -2 * r;
@@ -213,8 +213,6 @@ void display_fillCircleHelper(uint16_t x0, uint16_t y0, uint16_t r, uint8_t corn
         x++;
         ddF_x += 2;
         f     += ddF_x;
-        // These checks avoid double-drawing certain lines, important
-        // for the SSD1306 library which has an INVERT drawing mode.
         if(x < (y + 1)) {
             if(corners & 1) display_drawVLine(x0+x, y0-y, 2*y+delta, color);
             if(corners & 2) display_drawVLine(x0-x, y0-y, 2*y+delta, color);
@@ -231,13 +229,13 @@ void display_fillCircleHelper(uint16_t x0, uint16_t y0, uint16_t r, uint8_t corn
 
 /*
    Function Desc:  Draw a rectangle with no fill color
-    Parameter1:    x   Top left corner x coordinate
-    Parameter2:    y   Top left corner y coordinate
-    Parameter3:    w   Width in pixels
-    Parameter4:    h   Height in pixels
-    Parameter5:    color 16-bit 5-6-5 Color to draw with
+    Param1:    x   Top left corner x coordinate
+    Param2:    y   Top left corner y coordinate
+    Param3:    w   Width in pixels
+    Param4:    h   Height in pixels
+    Param5:    color
 */
-void display_drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color) {
+void display_drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color) {
     display_drawHLine(x, y, w, color);
     display_drawHLine(x, y+h-1, w, color);
     display_drawVLine(x, y, h, color);
@@ -247,14 +245,14 @@ void display_drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t c
 
 /*
    Function Desc:  Draw a rounded rectangle with no fill color
-    Parameter1:    x   Top left corner x coordinate
-    Parameter2:    y   Top left corner y coordinate
-    Parameter3:    w   Width in pixels
-    Parameter4:    h   Height in pixels
-    Parameter5:    r   Radius of corner rounding
-    Parameter6:    color 16-bit 5-6-5 Color to draw with
+    Param1:    x   Top left corner x coordinate
+    Param2:    y   Top left corner y coordinate
+    Param3:    w   Width in pixels
+    Param4:    h   Height in pixels
+    Param5:    r   Radius of corner rounding
+    Param6:    color 
 */
-void display_drawRoundRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t r, uint16_t color) {
+void display_drawRoundRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t r, uint8_t color) {
     int16_t max_radius = ((w < h) ? w : h) / 2; // 1/2 minor axis
     if(r > max_radius) r = max_radius;
     // smarter version
@@ -272,38 +270,37 @@ void display_drawRoundRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint1
 
 /*
    Function Desc:  Draw a rounded rectangle with fill color
-    Parameter1:    x   Top left corner x coordinate
-    Parameter2:    y   Top left corner y coordinate
-    Parameter3:    w   Width in pixels
-    Parameter4:    h   Height in pixels
-    Parameter5:    r   Radius of corner rounding
-    Parameter6:    color 16-bit 5-6-5 Color to draw/fill with
+    Param1:    x   Top left corner x coordinate
+    Param2:    y   Top left corner y coordinate
+    Param3:    w   Width in pixels
+    Param4:    h   Height in pixels
+    Param5:    r   Radius of corner rounding
+    Param6:    color 
 */
 void display_fillRoundRect(uint16_t x, uint16_t y, uint16_t w,
-  uint16_t h, uint16_t r, uint16_t color) {
+  uint16_t h, uint16_t r, uint8_t color) {
     int16_t max_radius = ((w < h) ? w : h) / 2; // 1/2 minor axis
     if(r > max_radius) r = max_radius;
     // smarter version
     display_fillRect(x+r, y, w-2*r, h, color);
     // draw four corners
     display_fillCircleHelper(x+w-r-1, y+r, r, 1, h-2*r-1, color);
-    //display_fillCircleHelper(94, 18, 8, 1, 43, color);
     display_fillCircleHelper(x+r    , y+r, r, 2, h-2*r-1, color);
 }
 
 
 /*
    Function Desc:  Draw a triangle with no fill color
-    Parameter1:    x0  Vertex #0 x coordinate
-    Parameter2:    y0  Vertex #0 y coordinate
-    Parameter3:    x1  Vertex #1 x coordinate
-    Parameter4:    y1  Vertex #1 y coordinate
-    Parameter5:    x2  Vertex #2 x coordinate
-    Parameter6:    y2  Vertex #2 y coordinate
-    Parameter7:    color 16-bit 5-6-5 Color to draw with
+    Param1:    x0  Vertex #0 x coordinate
+    Param2:    y0  Vertex #0 y coordinate
+    Param3:    x1  Vertex #1 x coordinate
+    Param4:    y1  Vertex #1 y coordinate
+    Param5:    x2  Vertex #2 x coordinate
+    Param6:    y2  Vertex #2 y coordinate
+    Param7:    color
 */
 void display_drawTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1,
-  uint16_t x2, uint16_t y2, uint16_t color) {
+  uint16_t x2, uint16_t y2, uint8_t color) {
     display_drawLine(x0, y0, x1, y1, color);
     display_drawLine(x1, y1, x2, y2, color);
     display_drawLine(x2, y2, x0, y0, color);
@@ -311,16 +308,16 @@ void display_drawTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1,
 
 /*
    Function Desc:    Draw a triangle with color-fill
-    Parameter1:    x0  Vertex #0 x coordinate
-    Parameter2:    y0  Vertex #0 y coordinate
-    Parameter3:    x1  Vertex #1 x coordinate
-    Parameter4:    y1  Vertex #1 y coordinate
-    Parameter5:    x2  Vertex #2 x coordinate
-    Parameter6:    y2  Vertex #2 y coordinate
-    Parameter7:    color 16-bit 5-6-5 Color to fill/draw with
+    Param1:    x0  Vertex #0 x coordinate
+    Param2:    y0  Vertex #0 y coordinate
+    Param3:    x1  Vertex #1 x coordinate
+    Param4:    y1  Vertex #1 y coordinate
+    Param5:    x2  Vertex #2 x coordinate
+    Param6:    y2  Vertex #2 y coordinate
+    Param7:    color 
 */
 void display_fillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1,
-  uint16_t x2, uint16_t y2, uint16_t color) {
+  uint16_t x2, uint16_t y2, uint8_t color) {
     int16_t a, b, y, last, dx01, dy01, dx02, dy02, dx12, dy12;
     int32_t
     sa   = 0,
@@ -337,7 +334,7 @@ void display_fillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1,
         _swap_int16_t(y0, y1); _swap_int16_t(x0, x1);
     }
 
-    if(y0 == y2) { // Handle awkward all-on-same-line case as its own thing
+    if(y0 == y2) { 
         a = b = x0;
         if(x1 < a)      a = x1;
         else if(x1 > b) b = x1;
@@ -397,7 +394,7 @@ void display_fillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1,
 
 /*
     Function Desc: Print one byte/character of data
-    Parameter1:  c  The 8-bit ascii character to write
+    Param1:  c  The 8-bit ascii character to write
 */
 void display_putc(char c) {
   uint8_t i, j;
@@ -451,8 +448,8 @@ void display_putc(char c) {
 }
 
 /* 
-  Function Desc : prints a string 
-  Parameter1: Pointer to a string of ASCII bytes
+  Desc: prints a string 
+  Param1: Pointer to a string of ASCII bytes
 */
 void display_puts(char *s) {
   while(*s)
@@ -460,7 +457,7 @@ void display_puts(char *s) {
 }
 
 /* 
-  Function Desc : print custom char  (dimension: 7x5 or 8x5 pixel)
+  Desc: print custom char  (dimension: 7x5 or 8x5 pixel)
 */
 void display_customChar(const uint8_t *c) {
   uint8_t i, j;
@@ -505,14 +502,14 @@ void display_customChar(const uint8_t *c) {
 
 /*
    Function Desc:  Draw a single character
-    Parameter1:    x   Bottom left corner x coordinate
-    Parameter2:    y   Bottom left corner y coordinate
-    Parameter3:    c   The 8-bit font-indexed character (likely ascii)
-    Parameter4:    color 16-bit 5-6-5 Color to draw chraracter with
-    Parameter5:    bg 16-bit 5-6-5 Color to fill background with (if same as color, no background)
-    Parameter6:    size  Font magnification level, 1 is 'original' size
+    Param1:    x   Bottom left corner x coordinate
+    Param2:    y   Bottom left corner y coordinate
+    Param3:    c   The 8-bit font-indexed character (likely ascii)
+    Param4:    color
+    Param5:   (if same as color, no background)
+    Param6:    size  Font magnification level, 1 is 'original' size
 */
-void display_drawChar(uint16_t x, uint16_t y, uint8_t c, uint16_t color, uint16_t bg,
+void display_drawChar(uint16_t x, uint16_t y, uint8_t c, uint8_t color, uint16_t bg,
      uint8_t size) {
   uint16_t prev_x     = cursor_x,
            prev_y     = cursor_y,
@@ -535,8 +532,8 @@ void display_drawChar(uint16_t x, uint16_t y, uint8_t c, uint16_t color, uint16_
 
 /*
     Function Desc: Set text cursor location
-    Parameter1:  x    X coordinate in pixels
-    Parameter2:  y    Y coordinate in pixels
+    Param1:  x    X coordinate in pixels
+    Param2:  y    Y coordinate in pixels
 */
 void display_setCursor(uint16_t x, uint16_t y) {
     cursor_x = x;
@@ -564,18 +561,13 @@ uint16_t display_getCursorY(void) {
 
 /*
     Function Desc:  Set text 'magnification' size. Each increase in s makes 1 pixel that much bigger.
-    Parameter1:  s  Desired text size. 1 is default 6x8, 2 is 12x16, 3 is 18x24, etc
+    Param1:  s  Desired text size. 1 is default 6x8, 2 is 12x16, 3 is 18x24, etc
 */
 void display_setTextSize(uint8_t s) {
     textsize = (s > 0) ? s : 1;
 }
 
 
-/*
-    Function Desc:  Set text font color with custom background color
-    Parameter1:   c   16-bit 5-6-5 Color to draw text with
-    Parameter2:   b   16-bit 5-6-5 Color to draw background/fill with
-*/
 void display_setTextColor(uint16_t c, uint16_t b) {
     textcolor   = c;
     textbgcolor = b;
@@ -584,7 +576,7 @@ void display_setTextColor(uint16_t c, uint16_t b) {
 
 /*
     Function Desc:     Whether text that is too long should 'wrap' around to the next line.
-    Parameter1:  w Set true for wrapping, false for clipping
+    Param1:  w Set true for wrapping, false for clipping
 */
 void display_setTextWrap(bool w) {
     wrap = w;
@@ -617,15 +609,15 @@ uint16_t display_getHeight(void) {
 /*
    Function Desc:    Draw a ROM-resident 1-bit image at the specified (x,y) position,
               using the specified foreground color (unset bits are transparent).
-    Parameter1:    x   Top left corner x coordinate
-    Parameter2:    y   Top left corner y coordinate
-    Parameter3:    bitmap  byte array with monochrome bitmap
-    Parameter4:    w   Width of bitmap in pixels
-    Parameter5:    h   Hieght of bitmap in pixels
-    Parameter6:    color 16-bit 5-6-5 Color to draw pixels with
+    Param1:    x   Top left corner x coordinate
+    Param2:    y   Top left corner y coordinate
+    Param3:    bitmap  byte array with monochrome bitmap
+    Param4:    w   Width of bitmap in pixels
+    Param5:    h   Hieght of bitmap in pixels
+    Param6:    color 
 */
 void display_drawBitmapV2(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h,
-  uint16_t color) {
+  uint8_t color) {
 
     uint16_t byteWidth = (w + 7) / 8; // Bitmap scanline pad = whole byte
     uint8_t _byte = 0;
@@ -641,7 +633,7 @@ void display_drawBitmapV2(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_
     }
 }
 
-
+// Called internally from display_printf
 uint8_t printNumber(uint32_t n, int8_t n_width, uint8_t _flags) {
   uint8_t i=0, j, buff[10];
   do {
@@ -672,6 +664,7 @@ uint8_t printNumber(uint32_t n, int8_t n_width, uint8_t _flags) {
   return j;
 }
 
+// Called internally from display_printf
 void printFloat(float float_n, int8_t f_width, int8_t decimal, uint8_t _flags) {
   int32_t int_part = float_n;
   float rem_part;
@@ -697,11 +690,15 @@ void printFloat(float float_n, int8_t f_width, int8_t decimal, uint8_t _flags) {
   }
 }
 
-
+/*
+ Desc : Called from display_printf
+ port of printf to display to screen instead of console
+ */
 void v_printf(const char *fmt, va_list arp) {
   uint8_t _flags, c, d=0, w=0;
   uint32_t nbr;
-  while (1) {
+  while (1) 
+  {
     c = *fmt++;
 
     if (!c)
@@ -778,11 +775,17 @@ void v_printf(const char *fmt, va_list arp) {
   }
 }
 
+/*
+ * Desc: Printf port for screen
+ * Param1: the format string
+ * Param2: variable arguments passed
+ */
 void display_printf(const char *fmt, ...) {
+  
   va_list arg;
   va_start(arg, fmt);
   v_printf(fmt, arg);
-  //va_end(arg);
+  va_end(arg);
 }
 
-/* ------------- EOF -------------------- */
+/* ------------- EOF ------------------ */

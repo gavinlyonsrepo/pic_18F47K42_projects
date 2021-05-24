@@ -34,16 +34,16 @@
 
 /* ----------------- User Functions ---------- */
 
-void display_drawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
-void display_drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
-void display_drawCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color);
-void display_drawCircleHelper(uint16_t x0, uint16_t y0, uint16_t r, uint8_t cornername, uint16_t color);
-void display_fillCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color);
-void display_fillCircleHelper(uint16_t x0, uint16_t y0, uint16_t r, uint8_t cornername, uint16_t delta, uint16_t color);
-void display_drawTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
-void display_fillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
-void display_drawRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint16_t color);
-void display_fillRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint16_t color);
+void display_drawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint8_t color);
+void display_drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color);
+void display_drawCircle(uint16_t x0, uint16_t y0, uint16_t r, uint8_t color);
+void display_drawCircleHelper(uint16_t x0, uint16_t y0, uint16_t r, uint8_t cornername, uint8_t color);
+void display_fillCircle(uint16_t x0, uint16_t y0, uint16_t r, uint8_t color);
+void display_fillCircleHelper(uint16_t x0, uint16_t y0, uint16_t r, uint8_t cornername, uint16_t delta, uint8_t color);
+void display_drawTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t color);
+void display_fillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t color);
+void display_drawRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint8_t color);
+void display_fillRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint8_t color);
 void display_setCursor(uint16_t x, uint16_t y);
 void display_setTextColor(uint16_t c, uint16_t bg);
 void display_setTextSize(uint8_t s);
@@ -52,7 +52,7 @@ void display_putc(char c);
 void display_puts(char *s);
 void display_printf(const char *fmt, ...);
 void display_customChar(const uint8_t *c);
-void display_drawChar(uint16_t x, uint16_t y, uint8_t c, uint16_t color, uint16_t bg, uint8_t size);
+void display_drawChar(uint16_t x, uint16_t y, uint8_t c, uint8_t color, uint16_t bg, uint8_t size);
 
 uint8_t  display_getRotation();
 uint16_t getCursorX(void);
@@ -60,10 +60,10 @@ uint16_t getCursorY(void);
 uint16_t display_getWidth();
 uint16_t display_getHeight();
 
-void display_drawBitmapV2   (uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color);
+void display_drawBitmapV2   (uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint8_t color);
 
 /* -------------- Non User Functions ------------------- */
-void writeLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
+void writeLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint8_t color);
 uint8_t printNumber(uint32_t n, int8_t n_width, uint8_t _flags);
 void printFloat(float float_n, int8_t f_width, int8_t decimal, uint8_t _flags);
 void v_printf(const char *fmt, va_list arp);
@@ -86,6 +86,8 @@ uint8_t
   textsize = 1;          ///< Desired magnification of text to print()
 bool
   wrap = true;           ///< If set, 'wrap' text at right edge of display
+
+
 
 // Standard ASCII 5x7 font
 #ifndef FONT5X7_H
