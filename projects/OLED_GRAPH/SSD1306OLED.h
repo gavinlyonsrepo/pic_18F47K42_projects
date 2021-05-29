@@ -1,8 +1,7 @@
 /*
 * Project Name: SSD1306_GRAPH
-* version 1.0
-* File: OLED.h 
-* Description: OLED 128X64 128X32 SSD1306 I2C library header file
+* File: SSD1306OLED.h 
+* Description: OLED SSD1306 I2C library header file
 * Author: Gavin Lyons.
 * Complier: xc8 v2.10 compiler
 * PIC: PIC18F47K42
@@ -12,13 +11,17 @@
 * URL: https://github.com/gavinlyonsrepo/pic_18F47K42_projects
 */
 
-#ifndef SSD1306_H
-#define	SSD1306_H
+#ifndef _SSD1306_H
+#define	_SSD1306_H
 
 // ************ Libs ****************
 #include "mcc_generated_files/mcc.h"
 
+// **** GLOBALS *****
 
+uint8_t _rotation=0; // 0-3
+int16_t _width, _height; // Display w/h as modified by current rotation 
+        
 typedef struct _Selected_Font_s
 {
   const uint8_t *font;        // Fonts Stored are Const
@@ -30,26 +33,30 @@ typedef struct _Selected_Font_s
 } Selected_Font_s;
 
 // ******* SSD1306 Display Type **********
+// ******* USER OPTION SELECTION *********
 #define SSD1306_128_64   
-// #define SSD1306_128_32 
+//#define SSD1306_128_32 
 // #define SSD1306_96_16
 // ***************************************
 
 
 #if defined SSD1306_128_64
-  #define SSD1306_LCDWIDTH                  128
-  #define SSD1306_LCDHEIGHT                 64
-  #define SSD1306_CLEAR_SIZE                1024
+  #define SSD1306_WIDTH                  128
+  #define SSD1306_HEIGHT                 64
+  #define SSD1306_PAGENUM                8
+  #define SSD1306_CLEAR_SIZE             1024
 #endif
 #if defined SSD1306_128_32
-  #define SSD1306_LCDWIDTH                  128
-  #define SSD1306_LCDHEIGHT                 32
-  #define SSD1306_CLEAR_SIZE                512
+  #define SSD1306_WIDTH                  128
+  #define SSD1306_HEIGHT                 32
+  #define SSD1306_PAGENUM                4
+  #define SSD1306_CLEAR_SIZE             512
 #endif
 #if defined SSD1306_96_16
-  #define SSD1306_LCDWIDTH                  96
-  #define SSD1306_LCDHEIGHT                 16
-  #define SSD1306_CLEAR_SIZE                192
+  #define SSD1306_WIDTH                  96
+  #define SSD1306_HEIGHT                 16
+  #define SSD1306_PAGENUM                 2
+  #define SSD1306_CLEAR_SIZE             192
 #endif
 
 #define LEFT                  0
@@ -73,10 +80,10 @@ typedef struct _Selected_Font_s
 #define SSD1306_NOP                                     0xE3
 
 // Scrolling Commands
-#define SSD1306_HORIZONTAL_SCROLL_RIGHT                 0x26
-#define SSD1306_HORIZONTAL_SCROLL_LEFT                  0x27
-#define SSD1306_HORIZONTAL_SCROLL_VERTICAL_AND_RIGHT    0x29
-#define SSD1306_HORIZONTAL_SCROLL_VERTICAL_AND_LEFT     0x2A
+#define SSD1306_RIGHT_HORIZONTAL_SCROLL                 0x26
+#define SSD1306_LEFT_HORIZONTAL_SCROLL                  0x27
+#define SSD1306_VERTICAL_AND_RIGHT_HORIZONTAL_SCROLL    0x29
+#define SSD1306_VERTICAL_AND_LEFT_HORIZONTAL_SCROLL     0x2A
 #define SSD1306_DEACTIVATE_SCROLL                       0x2E
 #define SSD1306_ACTIVATE_SCROLL                         0x2F
 #define SSD1306_SET_VERTICAL_SCROLL_AREA                0xA3
@@ -109,29 +116,51 @@ typedef struct _Selected_Font_s
 #define SSD1306_DATA_CONTINUE               0x40
 #define SSD1306_ADDR          0x3C //0x3D
 
+#define swap(a, b) { int16_t t = a; a = b; b = t; }
+
 // ******** Function Prototypes  *****************
 
-// Whole Display
+// Display related
 void SSD1306_Init( void );
 void SSD1306_UpdateDisplay( void );
-uint8_t SSD1306_Width( void );
-uint8_t SSD1306_Height( void );
 void SSD1306_Contrast( uint8_t contrast );
 void SSD1306_FillBuffer( uint8_t pattern);
 void SSD1306_InvertDisplay( bool value );
+void SSD1306_DisplayEnable(uint8_t on);
+void SSD1306_setRotation(uint8_t r);
+void SSD1306_FillScreen(uint8_t pattern);
+void SSD1306_FillPage(uint8_t page_num, uint8_t pattern);  
 
 // Graphics related 
 void SSD1306_SetPixel( int16_t x, int16_t y, uint8_t color );
-void SSD1306_Line( int16_t x_start, int16_t y_start, int16_t x_end, int16_t y_end, uint8_t color);
-void SSD1306_V_Line( int16_t y_start, int16_t y_end, int16_t x_pos, uint8_t color);
-void SSD1306_H_Line( int16_t x_start, int16_t x_end, int16_t y_pos, uint8_t color);
-void SSD1306_Rectangle( int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint8_t color);
-void SSD1306_FillRectangle( int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint8_t color);
+void SSD1306_Line(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint8_t color);
+void SSD1306_V_Line(int16_t x, int16_t y, int16_t h, uint8_t color);
+void SSD1306_H_Line(int16_t x, int16_t y, int16_t w, uint8_t color);
+
+void SSD1306_Rectangle( int16_t x, int16_t y, int16_t w, int16_t h, uint8_t color);
+void SSD1306_FillRectangle(int16_t x, int16_t y, int16_t w, int16_t h, uint8_t color);
+
 void SSD1306_Triangle( int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint8_t color);
+void SSD1306_FillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1,
+	  int16_t x2, int16_t y2, uint8_t color);
+
 void SSD1306_Circle( int16_t x_center, int16_t y_center, int16_t radius, uint8_t color);
+void SSD1306_DrawCircleHelper( int16_t x0, int16_t y0,
+				 int16_t r, uint8_t cornername, uint8_t color);
+
+void SSD1306_FillCircle(int16_t x0, int16_t y0, int16_t r, uint8_t color);
+void SSD1306_FillCircleHelper(int16_t x0, int16_t y0, int16_t r, uint8_t cornername,
+	  int16_t delta, uint8_t color);
+
+void SSD1306_DrawRoundRect(int16_t x0, int16_t y0, int16_t w, int16_t h,
+	  int16_t radius, uint8_t color);
+void SSD1306_FillRoundRect(int16_t x0, int16_t y0, int16_t w, int16_t h,
+	  int16_t radius, uint8_t color);
 
 // Bitmap
-void SSD1306_BITMAP( const uint8_t *image );
+void SSD1306_Bitmap( const uint8_t *image );
+void SSD1306_BitmapBuffer(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h,
+  uint8_t color);
 
 // Text related 
 void SSD1306_SetFont( const uint8_t *font);
@@ -139,4 +168,11 @@ void SSD1306_InvertFont( bool invert_status );
 void SSD1306_Write( int16_t x, int16_t y, char value );
 void SSD1306_Write_Text( int16_t x, int16_t y, char *text);
 
-#endif	/* SSD1306_H */
+// Scroll
+void SSD1306_StartScrollRight(uint8_t start, uint8_t stop); 
+void SSD1306_StartScrollLeft(uint8_t start, uint8_t stop) ;
+void SSD1306_StartScrollDiagRight(uint8_t start, uint8_t stop) ;
+void SSD1306_StartScrollDiagLeft(uint8_t start, uint8_t stop) ;
+void SSD1306_StopScroll(void) ;
+
+#endif	// header guard

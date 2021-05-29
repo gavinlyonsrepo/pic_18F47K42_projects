@@ -8,3 +8,6 @@
 	
 ### September 2020
 	* Added I2C OLED SSD1306 graphics library.
+
+### May 2021
+	* Major upgrade to I2C OLED SSD1306 graphics library.
