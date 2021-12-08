@@ -41,6 +41,9 @@ There is a USER OPTION SELECTION scetion by top of header file to select screen 
 2. UNO font X by Y = 6 by 8 . 147 characters.
 3. MEGA font X by Y  = 16 by 16 . 32 characters
 
+More fonts can be found here at  [link](http://www.rinkydinkelectronics.com/r_fonts.php),as  well as instructions on how to create them.
+
+
 **Bitmaps** 
 
 Two bitmap functions, 
