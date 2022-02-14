@@ -52,9 +52,7 @@ Some LCDs come with backlight features that help reading display data in low ill
 They have two additional connections (LED+ and LED- or A and K).
 
 In this example , a 4-pin PCF8574 Interface "backpack" board is attached to LCD.
-It is controlled via the two pin I2C bus. Both pins must be held logic high by pull-up resistors. 
-
-The LCD code is in a separate library called "lcd.h" and called "lcd.c".
+It is controlled via the two pin I2C bus. 
 The Data is sent in 4-bit mode. The upper nibble holds the data and lower nibble of byte manipulates
 the control bits of LCD(enable and register select). 
 
