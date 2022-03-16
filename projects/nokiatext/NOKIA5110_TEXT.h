@@ -9,49 +9,52 @@
 #ifndef NOKIA5110_TEXT_H
 #define NOKIA5110_TEXT_H
 
+// Section :: libraries 
 #include <stdint.h>
 #include <stdbool.h>
 #include "mcc_generated_files/mcc.h"
 
+
+// Section :: Defines 
 // **** FONT DEFINE SECTION ******  
 // Comment in the fonts you want, X_1 is default. 
-#define NOKIA5110_FONT_1
-//#define NOKIA5110_FONT_2
-//#define NOKIA5110_FONT_3
-//#define NOKIA5110_FONT_4
-//#define NOKIA5110_FONT_5
-//#define NOKIA5110_FONT_6
-//#define NOKIA5110_FONT_7
-//#define NOKIA5110_FONT_8
-//#define NOKIA5110_FONT_9
+#define NOKIA5110_FONT_Default
+#define NOKIA5110_FONT_Thick
+#define NOKIA5110_FONT_Aurebesh
+#define NOKIA5110_FONT_SevenSeg
+#define NOKIA5110_FONT_Wide
+#define NOKIA5110_FONT_Tiny
+#define NOKIA5110_FONT_Large
+#define NOKIA5110_FONT_Huge
+#define NOKIA5110_FONT_Mega
 // **** END OF FONT DEFINE SECTION ******  
 
-#ifdef NOKIA5110_FONT_1
-#include "NOKIA5110_TEXT_FONT.h" // Default 5X8
+#ifdef NOKIA5110_FONT_Default
+#include "NOKIA5110_TEXT_FONT_Default.h" // Default 5X8
 #endif
-#ifdef NOKIA5110_FONT_2
-#include "NOKIA5110_TEXT_FONT_TWO.h" // Thick 7X8  (NO LOWERCASE LETTERS)
+#ifdef NOKIA5110_FONT_Thick
+#include "NOKIA5110_TEXT_FONT_Thick.h" // Thick 7X8  (NO LOWERCASE LETTERS)
 #endif
-#ifdef NOKIA5110_FONT_3
-#include "NOKIA5110_TEXT_FONT_THREE.h" // Aurebesh 5X8
+#ifdef NOKIA5110_FONT_Aurebesh
+#include "NOKIA5110_TEXT_FONT_Aurebesh.h" // Aurebesh 5X8
 #endif
-#ifdef NOKIA5110_FONT_4
-#include "NOKIA5110_TEXT_FONT_FOUR.h" //seven segment 4X8
+#ifdef NOKIA5110_FONT_SevenSeg
+#include "NOKIA5110_TEXT_FONT_7Seg.h" //seven segment 4X8
 #endif
-#ifdef NOKIA5110_FONT_5
-#include "NOKIA5110_TEXT_FONT_FIVE.h" // Wide  8X8 (NO LOWERCASE LETTERS)
+#ifdef NOKIA5110_FONT_Wide
+#include "NOKIA5110_TEXT_FONT_Wide.h" // Wide  8X8 (NO LOWERCASE LETTERS)
 #endif
-#ifdef NOKIA5110_FONT_6
-#include "NOKIA5110_TEXT_FONT_SIX.h" // Tiny 3X8
+#ifdef NOKIA5110_FONT_Tiny
+#include "NOKIA5110_TEXT_FONT_Tiny.h" // Tiny 3X8
 #endif
-#ifdef NOKIA5110_FONT_7
-#include "NOKIA5110_TEXT_FONT_SEVEN.h" // Large 12 X 16 (no lowercase letters)
+#ifdef NOKIA5110_FONT_Large
+#include "NOKIA5110_TEXT_FONT_Large.h" // Large 12 X 16 (no lowercase letters)
 #endif
-#ifdef NOKIA5110_FONT_8
-#include "NOKIA5110_TEXT_FONT_EIGHT.h" // Huge 16 X24 (numbers + . : only) 
+#ifdef NOKIA5110_FONT_Huge
+#include "NOKIA5110_TEXT_FONT_Huge.h" // Huge 16 X24 (numbers + . : only) 
 #endif
-#ifdef NOKIA5110_FONT_9
-#include "NOKIA5110_TEXT_FONT_NINE.h" // Mega 16 X 32 (numbers + . : / only)
+#ifdef NOKIA5110_FONT_Mega
+#include "NOKIA5110_TEXT_FONT_Mega.h" // Mega 16 X 32 (numbers + . : / only)
 #endif
 
 //LCD Commands PCD8544_
@@ -64,31 +67,54 @@
 #define LCD_DISPLAYCONTROL_INVERSE 0x0D //Set display control, inverse mode. 0x0D for inverse
 #define LCD_POWERDOWN    0x24 //LCD power off
 
-// Misc LCD Data 
-#define LCD_FONTNUMBER  0x01 // default Font number 1,  1 to 6 fonts
-#define LCD_ASCII_OFFSET 0x20 //0x20, ASCII character for Space, The font table starts with this character
-#define LCD_ASCII_OFFSET_ZERO 0x2E // ASCII code for . is 0X2E (. / 0 1 etc)
-
 //The DC pin tells the LCD if sending a command or data
 #define LCD_COMMAND 0
 #define LCD_DATA 1
 
 // 84 by 48 pixels screen
-#define LCD_X 84
-#define LCD_Y 48
+#define LCD_X_WIDTH 84
+#define LCD_Y_HEIGHT 48
 
-// Size width of fonts in pixels, add 2 for padding 1-6
-#define LCD_FONT_WIDTH_1 5
-#define LCD_FONT_WIDTH_2 7
-#define LCD_FONT_WIDTH_3 5
-#define LCD_FONT_WIDTH_4 4
-#define LCD_FONT_WIDTH_5 8
-#define LCD_FONT_WIDTH_6 3
-#define LCD_FONT_WIDTH_7 12 // No padding  , no lowercase letters
-#define LCD_FONT_WIDTH_8 16 // No padding ,  numbers only
-#define LCD_FONT_WIDTH_9 16 // No padding ,  numbers only
 
-// Methods
+// Section :: enums
+
+typedef enum {
+    LCDFont_Default = 1,
+    LCDFont_Thick = 2, // No lowercase letters
+    LCDFont_Aurebesh = 3,
+    LCDFont_Seven_Seg = 4,
+    LCDFont_Wide = 5, // No lowercase letters
+    LCDFont_Tiny = 6,
+    LCDFont_Large = 7, // No lowercase letters
+    LCDFont_Huge = 8, // numbers + . : only
+    LCDFont_Mega = 9 // numbers + . : / only
+} LCDFontType_e; // type of font
+
+typedef enum {
+    LCDFont_W_3 = 3, // tiny font
+    LCDFont_W_4 = 4, // seven segment font
+    LCDFont_W_5 = 5, // Default + aurebesh
+    LCDFont_W_7 = 7, // thick
+    LCDFont_W_8 = 8, // wide
+    LCDFont_W_12 = 12, // large , no lowercase letters
+    LCDFont_W_16 = 16 // mega and  , numbers only
+} LCDFontWidth_e; // Size width of fonts in pixels, add padding for font_width < 9
+
+typedef enum {
+    LCDFont_O_Full = 0x00, //   full ASCII
+    LCDFont_O_Space = 0x20, // Starts at Space
+    LCDFont_O_Number = 0x2E, // // ASCII code for . is 0X2E (. / 0 1 etc)
+} LCDFontOffset_e; // font offset in the ASCII table
+
+typedef enum {
+    LCDPadding_None = 0, // no padding 
+    LCDPadding_LHS = 1, // Left hand side padding only
+    LCDPadding_RHS = 2, // Right hand side padding only 
+    LCDPadding_Both = 3 // LHS + RHS padding
+} LCDPaddingType_e; // Padding value
+
+// Section :: Functions prototypes
+
 void LCDInit(bool, uint8_t, uint8_t);
 void LCDgotoXY(uint8_t, uint8_t);
 void LCDClear(uint8_t);
@@ -99,22 +125,14 @@ void LCDenableSleep(void);
 void LCDdisableSleep(void);
 void LCDCharacter(char);
 void LCDWrite(unsigned char, unsigned char);
-void LCDFont(uint8_t);
+void LCDFont(LCDFontType_e);
 void LCDSetPixel(uint8_t, uint8_t);
 void LCDFillBlock(uint8_t, uint8_t);
-void LCDCustomChar(const unsigned char character[], uint16_t, uint8_t);
+void LCDCustomChar(const unsigned char character[], uint16_t, LCDPaddingType_e);
 bool LCDIsSleeping(void);
 
-void LCDdraw_fonts_1TO6(char character, uint8_t font_width); //8 bit tall fonts
-void LCDdraw_fonts_7(char character); // 16 bit tall fonts
-void LCDdraw_fonts_8TO9(char character); // 24 and 32 bit tall fonts
-
-uint8_t _contrast = LCD_CONTRAST;
-uint8_t _FontNumber = LCD_FONTNUMBER;
-uint8_t _bias = LCD_BIAS;
-bool _sleep = false;
-bool _inverse = false;
-uint8_t _Block = 0;
-uint8_t _Col = 0;
+void LCDDrawFonts1TO6(char character, LCDFontWidth_e); //8 bit tall fonts
+void LCDDrawFonts7(char character); // 16 bit tall fonts
+void LCDDrawFonts8TO9(char character); // 24 and 32 bit tall fonts
 
 #endif

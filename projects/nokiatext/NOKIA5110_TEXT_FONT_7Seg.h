@@ -9,7 +9,7 @@
 #ifndef NOKIA5110_TEXT_FONT_FOUR_H
 #define NOKIA5110_TEXT_FONT_FOUR_H
 
-const unsigned char ASCII_FOUR[92][4] = {
+const unsigned char FontSevenSegment[92][4] = {
 	{0x00,0x00,0x00,0x00}, //  
 	{0x36,0x00,0x00,0x00}, // !
 	{0x06,0x00,0x00,0x06}, // "

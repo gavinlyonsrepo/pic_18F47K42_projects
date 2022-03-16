@@ -78,12 +78,12 @@ By default only Font 1 is commented in and ready to go.
 So to use a non-default Font (2-9), two steps.
 
 1. Comment in the respective define at top of library header file NOKIA5110_TEXT.h in the FONT DEFINE SECTION.
-2. Call LCDFont function and pass it number of respective font.
+2. Call LCDFont function and pass it enum name label of respective font.
 
 Only include what fonts you want in order to keep program size as small as possible.
-Each font is a header file, NOKIA5110_FONT_X.h where X is number of Font(1-9)
+Each font is a header file, NOKIA5110_TEXT_FONT_X.h where X is name of Font.
 Some fonts do not have lowercase letters and others are numbers only.
-For fonts 1-6 Each character is a byte of pixels in height(Y). One pixel of empty space on each side 
+For fonts 1-6, Each character is a byte of pixels in height(Y). One pixel of empty space on each side 
 is added by code (padding). So a 5x8 (XxY) pixel character is in reality 7x8. 
 Each of the six rowblock is one byte height. 
 

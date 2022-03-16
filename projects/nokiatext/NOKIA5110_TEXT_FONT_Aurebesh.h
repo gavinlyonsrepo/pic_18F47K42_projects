@@ -8,7 +8,7 @@
 #ifndef NOKIA5110_TEXT_FONT_AUREBESH_H
 #define NOKIA5110_TEXT_FONT_AUREBESH_H
 
-const unsigned char  ASCII_THREE[][5]  = {
+const unsigned char  FontAurebesh[][5]  = {
 {0x00, 0x00, 0x00, 0x00, 0x00} // 20
 ,{0x00, 0x00, 0x5f, 0x00, 0x00} // 21 !
 ,{0x00, 0x07, 0x00, 0x07, 0x00} // 22 ?

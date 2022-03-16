@@ -6,10 +6,11 @@
 // so ! is 0 0 5F 0 0 , Also in code adds two blank lines on either side so in effect 0 0 0 5f 0 0 0 
 // Each character is in a 7 by 8 pixel box 
 
+
 #ifndef NOKIA5110_TEXT_FONT_H
 #define NOKIA5110_TEXT_FONT_H
 
-const unsigned char ASCII[][5]  = {
+const unsigned char FontDefault[][5]  = {
 {0x00, 0x00, 0x00, 0x00, 0x00} // 20
 ,{0x00, 0x00, 0x5f, 0x00, 0x00} // 21 ! 
 ,{0x00, 0x07, 0x00, 0x07, 0x00} // 22 ?
@@ -105,5 +106,6 @@ const unsigned char ASCII[][5]  = {
 ,{0x00, 0x00, 0x7f, 0x00, 0x00} // 7c |
 ,{0x00, 0x41, 0x36, 0x08, 0x00} // 7d }
 };
+
 
 #endif

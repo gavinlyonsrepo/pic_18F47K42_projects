@@ -9,7 +9,7 @@
 #ifndef NOKIA5110_TEXT_FONT_SIX_H
 #define NOKIA5110_TEXT_FONT_SIX_H
 
-const unsigned char ASCII_SIX[][3] = {
+const unsigned char FontTiny[][3] = {
 	{0x00,0x00,0x00}, //  
 	{0x00,0x2e,0x00}, // !
 	{0x06,0x00,0x06}, // "
