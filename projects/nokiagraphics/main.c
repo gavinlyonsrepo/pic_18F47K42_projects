@@ -12,8 +12,8 @@
 
 /* -------- libraries -------- */
 #include "mcc_generated_files/mcc.h"
-#include "NOKIA.h"   // include PCD8544 controller driver source code (Nokia 5110 LCD driver)
-#include "GRAPHICS.h"  // include graphics library source code
+#include "Nokia5110_PCD8544.h"   // include PCD8544 controller driver source code (Nokia 5110 LCD driver)
+#include "Display_Graphics.h"  // include graphics library source code
 
 /* ----------- Defines -----------*/
 #define TESTDELAY 2000 // mS
@@ -82,7 +82,7 @@ void main(void) {
         testdrawcircle(); //   5.  Draw multiple circles
 
         // 6. Draw a circle, 10 pixel radius
-        display_fillCircle(display_width / 2, display_height / 2, 10, BLACK);
+        display_fillCircle(display_width / 2, display_height / 2, 10, LCD_BLACK);
         screenreset();
 
         testdrawroundrect(); // 7. Draw a rounded rectangle
@@ -94,9 +94,9 @@ void main(void) {
         testRotate(); //        13. Rotation example
 
         //  14. Miniature bitmap display
-        display_clear();
-        display_drawBitmapV2(30, 16, Flake_bmp, 16, 16, BLACK);
-        display();
+        LCDdisplayClear();
+        display_drawBitmapV2(30, 16, Flake_bmp, 16, 16, LCD_BLACK);
+        LCDdisplay();
 
         //  15. Invert the display
         display_invert(true);
@@ -119,21 +119,21 @@ void Setup(void) {
     SYSTEM_Initialize();
     //INTERRUPT_GlobalInterruptEnable();
     //INTERRUPT_GlobalInterruptDisable();
-    LCD_begin();
-    display_setContrast(CONTRAST);
-    display(); // show splashscreen
+    LCDBegin();
+    LCDdisplay_setContrast(CONTRAST);
+    LCDdisplay(); // show splashscreen
     __delay_ms(INITDELAY);
-    display_clear(); // clears the screen and buffer
+    LCDdisplayClear(); // clears the screen and buffer
     LED_STATUS_RA0_SetHigh();
 }
 
 void testsleepmode(void) {
-    display_clear();
+    LCDdisplayClear();
     LED_STATUS_RA0_SetLow();
     display_setCursor(0, 0);
     display_setTextSize(1);
     display_puts("Sleep Mode!\r\n");
-    display();
+    LCDdisplay();
     __delay_ms(5000);
     LCDenableSleep();
     __delay_ms(5000);
@@ -144,37 +144,37 @@ void testsleepmode(void) {
 void testTextModes(void) {
     // text display tests
     display_setTextSize(1);
-    display_setTextColor(BLACK, WHITE);
+    display_setTextColor(LCD_BLACK, LCD_WHITE);
     display_setCursor(0, 0);
     display_puts("Hello world!\r\n");
-    display_setTextColor(WHITE, BLACK); // 'inverted' text
+    display_setTextColor(LCD_WHITE, LCD_BLACK); // 'inverted' text
     display_printf("%4.2f\r\n", 3.141592);
     display_setTextSize(2);
-    display_setTextColor(BLACK, WHITE);
+    display_setTextColor(LCD_BLACK, LCD_WHITE);
     display_printf("0x%X\r\n", 0xABCD);
-    display();
+    LCDdisplay();
     __delay_ms(3000);
-     display_clear();
+     LCDdisplayClear();
     display_setCursor(0, 0);
     display_setTextSize(4);
     display_puts("99\r\n");
     display_setTextSize(1);
     display_printf("%d\r\n", 14790);
-    display();
+    LCDdisplay();
     __delay_ms(4000);
 }
 
 void testRotate(void) {
     // rotation example
-    display_clear();
+    LCDdisplayClear();
     display_setRotation(1); // rotate 90 degrees counter clockwise, can also use values of 2 and 3 to go further.
     display_setTextSize(1);
-    display_setTextColor(BLACK, WHITE);
+    display_setTextColor(LCD_BLACK, LCD_WHITE);
     display_setCursor(0, 0);
     display_puts("Rotation\r\n");
     display_setTextSize(2);
     display_puts("Example!\r\n");
-    display();
+    LCDdisplay();
     __delay_ms(TESTDELAY);
 
     // revert back to no rotation
@@ -182,10 +182,10 @@ void testRotate(void) {
 }
 
 void textdrawpixel(void) {
-    display_drawPixel(10, 10, BLACK);
-    display();
+    display_drawPixel(10, 10, LCD_BLACK);
+    LCDdisplay();
     __delay_ms(TESTDELAY);
-    display_clear();
+    LCDdisplayClear();
 }
 
 void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h) {
@@ -205,16 +205,16 @@ void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h) {
         for (f = 0; f < NUMFLAKES; f++) {
             x_pos = icons[f][XPOS];
             y_pos = icons[f][YPOS];
-            display_drawBitmapV2(x_pos, y_pos, bitmap, w, h, BLACK);
+            display_drawBitmapV2(x_pos, y_pos, bitmap, w, h, LCD_BLACK);
         }
-        display();
+        LCDdisplay();
         __delay_ms(200);
 
         // then erase it + move it
         for (f = 0; f < NUMFLAKES; f++) {
             x_pos = icons[f][XPOS];
             y_pos = icons[f][YPOS];
-            display_drawBitmapV2(x_pos, y_pos, bitmap, w, h, WHITE);
+            display_drawBitmapV2(x_pos, y_pos, bitmap, w, h, LCD_WHITE);
             // move it
             icons[f][YPOS] += icons[f][DELTAY];
             // if its gone, reinit
@@ -232,7 +232,7 @@ void testdrawchar(void) {
     char i;
      const uint8_t mycustomchar[] = {0xFF,0x00,0xFF,0x00,0xFF,0x00,0xFF,0x00};
     display_setTextSize(1);
-    display_setTextColor(BLACK, WHITE);
+    display_setTextColor(LCD_BLACK, LCD_WHITE);
     display_setCursor(0, 0);
     display_setTextWrap(true);
     for (i = 0; i < 83; i++) 
@@ -266,8 +266,8 @@ void testdrawchar(void) {
 void testdrawcircle(void) {
     char i;
     for (i = 0; i < display_height; i += 2) {
-        display_drawCircle(display_width / 2, display_height / 2, i, BLACK);
-        display();
+        display_drawCircle(display_width / 2, display_height / 2, i, LCD_BLACK);
+        LCDdisplay();
     }
     screenreset();
 }
@@ -277,7 +277,7 @@ void testfillrect(void) {
     for (i = 0; i < display_height / 2; i += 3) {
         // alternate colors
         display_fillRect(i, i, display_width - i * 2, display_height - i * 2, color % 2);
-        display();
+        LCDdisplay();
         color++;
     }
     screenreset();
@@ -285,116 +285,116 @@ void testfillrect(void) {
 
 void testdrawtriangle(void) {
     char i;
-    for (i = 0; i < min(display_width, display_height) / 2; i += 5) {
+    for (i = 0; i < _min_LCD(display_width, display_height) / 2; i += 5) {
         display_drawTriangle(display_width / 2, display_height / 2 - i,
                 display_width / 2 - i, display_height / 2 + i,
-                display_width / 2 + i, display_height / 2 + i, BLACK);
-        display();
+                display_width / 2 + i, display_height / 2 + i, LCD_BLACK);
+        LCDdisplay();
     }
     __delay_ms(TESTDELAY);
-   display_clear();
+   LCDdisplayClear();
 }
 
 void testfilltriangle(void) {
-    short i, color = BLACK;
-    for (i = min(display_width, display_height) / 2; i > 0; i -= 5) {
+    short i, color = LCD_BLACK;
+    for (i = _min_LCD(display_width, display_height) / 2; i > 0; i -= 5) {
         display_fillTriangle(display_width / 2, display_height / 2 - i,
                 display_width / 2 - i, display_height / 2 + i,
                 display_width / 2 + i, display_height / 2 + i, color);
-        if (color == WHITE) color = BLACK;
-        else color = WHITE;
-        display();
+        if (color == LCD_WHITE) color = LCD_BLACK;
+        else color = LCD_WHITE;
+        LCDdisplay();
     }
     __delay_ms(TESTDELAY);
-    display_clear();
+    LCDdisplayClear();
 }
 
 void testdrawroundrect(void) {
     char i;
     for (i = 0; i < display_height / 2 - 2; i += 2) {
-        display_drawRoundRect(i, i, display_width - 2 * i, display_height - 2 * i, display_height / 4, BLACK);
-        display();
+        display_drawRoundRect(i, i, display_width - 2 * i, display_height - 2 * i, display_height / 4, LCD_BLACK);
+        LCDdisplay();
     }
     __delay_ms(TESTDELAY);
-    display_clear();
+    LCDdisplayClear();
 }
 
 void testfillroundrect(void) {
-    char i, color = BLACK;
+    char i, color = LCD_BLACK;
     for (i = 0; i < display_height / 2 - 2; i += 2) {
         display_fillRoundRect(i, i, display_width - 2 * i, display_height - 2 * i, display_height / 4, color);
-        if (color == WHITE) color = BLACK;
-        else color = WHITE;
-        display();
+        if (color == LCD_WHITE) color = LCD_BLACK;
+        else color = LCD_WHITE;
+        LCDdisplay();
     }
     __delay_ms(TESTDELAY);
-    display_clear();
+    LCDdisplayClear();
 }
 
 void testdrawrect(void) {
     char i;
     for (i = 0; i < display_height / 2; i += 2) {
-        display_drawRect(i, i, display_width - 2 * i, display_height - 2 * i, BLACK);
-        display();
+        display_drawRect(i, i, display_width - 2 * i, display_height - 2 * i, LCD_BLACK);
+        LCDdisplay();
     }
 }
 
 void testdrawline(void) {
     short i;
     for (i = 0; i < display_width; i += 4) {
-        display_drawLine(0, 0, i, display_height - 1, BLACK);
-        display();
+        display_drawLine(0, 0, i, display_height - 1, LCD_BLACK);
+        LCDdisplay();
     }
     for (i = 0; i < display_height; i += 4) {
-        display_drawLine(0, 0, display_width - 1, i, BLACK);
-        display();
+        display_drawLine(0, 0, display_width - 1, i, LCD_BLACK);
+        LCDdisplay();
     }
     __delay_ms(LINEDRAWDELAY);
 
-    display_clear();
+    LCDdisplayClear();
     for (i = 0; i < display_width; i += 4) {
-        display_drawLine(0, display_height - 1, i, 0, BLACK);
-        display();
+        display_drawLine(0, display_height - 1, i, 0, LCD_BLACK);
+        LCDdisplay();
     }
     for (i = display_height - 1; i >= 0; i -= 4) {
-        display_drawLine(0, display_height - 1, display_width - 1, i, BLACK);
-        display();
+        display_drawLine(0, display_height - 1, display_width - 1, i, LCD_BLACK);
+        LCDdisplay();
     }
     __delay_ms(LINEDRAWDELAY);
 
-    display_clear();
+    LCDdisplayClear();
     for (i = display_width - 1; i >= 0; i -= 4) {
-        display_drawLine(display_width - 1, display_height - 1, i, 0, BLACK);
-        display();
+        display_drawLine(display_width - 1, display_height - 1, i, 0, LCD_BLACK);
+        LCDdisplay();
     }
     for (i = display_height - 1; i >= 0; i -= 4) {
-        display_drawLine(display_width - 1, display_height - 1, 0, i, BLACK);
-        display();
+        display_drawLine(display_width - 1, display_height - 1, 0, i, LCD_BLACK);
+        LCDdisplay();
     }
     __delay_ms(LINEDRAWDELAY);
 
-    display_clear();
+    LCDdisplayClear();
     for (i = 0; i < display_height; i += 4) {
-        display_drawLine(display_width - 1, 0, 0, i, BLACK);
-        display();
+        display_drawLine(display_width - 1, 0, 0, i, LCD_BLACK);
+        LCDdisplay();
     }
     for (i = 0; i < display_width; i += 4) {
-        display_drawLine(display_width - 1, 0, i, display_height - 1, BLACK);
-        display();
+        display_drawLine(display_width - 1, 0, i, display_height - 1, LCD_BLACK);
+        LCDdisplay();
     }
     __delay_ms(LINEDRAWDELAY);
     screenreset();
 }
 
 void testfillscreen(void){
-    fillScreen();
+    LCDfillScreen();
     __delay_ms(TESTDELAY);
-    display_clear();
+    LCDdisplayClear();
 }
 
 void screenreset(void) {
-    display();
+    LCDdisplay();
     __delay_ms(TESTDELAY);
-    display_clear();
+    LCDdisplayClear();
 }
 /*----------------------- End of File ---------------------------*/

@@ -11,8 +11,8 @@
 * URL: https://github.com/gavinlyonsrepo/pic_18F47K42_projects
 */
 
-#ifndef NOKIA_H
-#define NOKIA_H
+#ifndef NOKIA_5110_H
+#define NOKIA_5110_H
 
 /* -------- libraries -------- */
 #include <stdint.h>
@@ -21,8 +21,8 @@
 
 /* ------ Definitions ------ */
 
-#define BLACK 1
-#define WHITE 0
+#define LCD_BLACK 1
+#define LCD_WHITE 0
 
 #define LCDWIDTH  84
 #define LCDHEIGHT 48
@@ -46,29 +46,29 @@
 #define LCD_SETVOP   0x80
 
 /* --------------- User Functions ------------- */
-void LCD_begin(void);
-void drawPixel(uint8_t x, uint8_t y, bool color);
-void drawHLine(uint8_t x, uint8_t y, uint8_t w, bool color);
-void drawVLine(uint8_t x, uint8_t y, uint8_t w, bool color);
-void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, bool color);
-void setRotation(uint8_t m);
-void display_setContrast(uint8_t con);
-void display(void);
-void display_clear(void);
-void fillScreen(void);
-void invertDisplay(bool inv);
+void LCDBegin(void);
+void LCDdrawPixel(uint8_t x, uint8_t y, bool color);
+
+void LCDsetRotation(uint8_t m);
+void LCDdisplay_setContrast(uint8_t con);
+void LCDdisplay(void);
+void LCDdisplayClear(void);
+void LCDfillScreen(void);
+void LCDinvertDisplay(bool inv);
 void LCDenableSleep(void);
 void LCDdisableSleep(void);
 
 /* ------------- Non User Functions --------- */
-void PCD8544_SPI_Write(uint8_t d);
-void writeCommand(uint8_t c);
+void LCDWriteData(uint8_t d);
+void LCDwriteCommand(uint8_t c);
 
 /* ----------- Variables --------- */
-#define pcd8544_swap(a, b) { uint8_t t = a; a = b; b = t; }
+#define _swap_int8_t_LCD(a, b) { uint8_t t = a; a = b; b = t; }
 
-uint8_t _width, _height, rotation;
-bool	_sleep;
+uint8_t _width_LCD;
+uint8_t _height_LCD; 
+uint8_t _rotation_LCD;
+bool	_sleep_LCD;
 
 // Memory buffer for the LCD : GL in sig
 uint8_t pcd8544_buffer[LCDWIDTH * LCDHEIGHT / 8] = {
