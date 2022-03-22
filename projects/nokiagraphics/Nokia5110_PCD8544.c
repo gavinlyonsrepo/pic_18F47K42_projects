@@ -46,14 +46,17 @@ void LCDBegin(void) {
    Desc:  Writes a byte to the PCD8544
    Param: data byte will be sent as command or data depending on status of DC line
 */
-void LCDWriteData(uint8_t d) {
-  uint8_t bit_n;
-  for (bit_n = 0x80; bit_n; bit_n >>= 1) {
-    LCD_CLK_SetLow();
-    if (d & bit_n) LCD_DIN_PORT = 1;
-    else           LCD_DIN_PORT = 0;
-     LCD_CLK_SetHigh();
-  }
+void LCDWriteData(uint8_t spiDataByte) {
+    uint8_t i = 0 ;
+    
+    for (i = 0; i < 8; i++) {
+        LCD_DIN_SetLow();
+        if (spiDataByte & 0x80)LCD_DIN_SetHigh(); // b1000000 Mask with 0 & all zeros out.
+        LCD_CLK_SetHigh();
+        spiDataByte <<= 1;
+        __delay_us(LCD_HIGH_FREQ_uSDELAY);
+        LCD_CLK_SetLow();
+    }
 }
 
 /* 

@@ -1,21 +1,20 @@
 /*
  * Project Name: NOKIA5110_TEXT
  * File: main.c
- * Description: Nokia library example file  
+ * Description: Nokia library example test file, runs a series of tests to test library.
  * Author: Gavin Lyons.
- * URL: https://github.com/gavinlyonsrepo/pic_18F47K42_projects
  */
 
 #include "mcc_generated_files/mcc.h"
 #include "NOKIA5110_TEXT.h"
 
 #define inverse  false
-#define contrast 0xB1 // default is 0xBF set in LCDinit, Try 0xB1 to 0xBF if your display is too dark
+#define contrast 0xBF // default is 0xBF set in LCDinit, Try 0xB1 to 0xBF if your display is too dark
 #define bias 0x13 // LCD bias mode 1:48: Try 0x12 or 0x13 or 0x14
 #define TEST_DELAY 2000
 
     // 'image1', snake game, 84x48px
-    const unsigned char mybitmap[504] = {
+    const unsigned char fullScreenBitmap[504] = {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xc0, 0xe0, 0xf0, 0xf8, 0xf8, 0x7c,
         0x7c, 0x20, 0x00, 0xe0, 0xe0, 0xf0, 0xf0, 0xf0, 0x80, 0x00, 0x00, 0xe0, 0xf8, 0xf8, 0xfc, 0x38,
         0x00, 0xe0, 0xf0, 0xf8, 0xf8, 0xf8, 0xf8, 0x80, 0x00, 0x10, 0x78, 0x7c, 0xfc, 0xfc, 0x00, 0x80,
@@ -71,10 +70,10 @@
     };
     
 
-void TestLoop(void); // General tests, default font , clear and fill , draw, custom char
-void TestTwoLoop(void); // For testing fonts 1-6  Comment in  defines at top of  NOKIA5110_TEXT.h if using non default
-void TestThreeLoop(void); // for testing fonts 7-9
-void TestFourLoop(void); // bitmap test
+void TestLoop(void); 
+void TestTwoLoop(void); 
+void TestThreeLoop(void); 
+void TestFourLoop(void); 
 void Setup(void); // setup the pic
 
 /* --------- Main application --------------- */
@@ -82,13 +81,15 @@ void main(void) {
     Setup();
     while (1) {
         __delay_ms(TEST_DELAY);
-        LED_STATUS_RA0_Toggle();
+        // General tests, default font , clear and fill , 
+        // draw, custom char
         TestLoop();
-        LED_STATUS_RA0_Toggle();
+        // For testing fonts 1-6  Comment in  defines at 
+        // top of  NOKIA5110_TEXT.h if using non default
         TestTwoLoop();
-        LED_STATUS_RA0_Toggle();
+        // for testing fonts 7-9
         TestThreeLoop();
-        LED_STATUS_RA0_Toggle();
+        // bitmap test
         TestFourLoop();
     }
 }
@@ -246,9 +247,9 @@ void TestTwoLoop() {
     LCDgotoXY(0, 1);
     LCDString("VOLTAGE 2"); //print to block 1
     __delay_ms(TEST_DELAY);
-    LCDFont(LCDFont_Aurebesh); //font 3
+    LCDFont(LCDFont_HomeSpun); //font 3
     LCDgotoXY(0, 2);
-    LCDString("ABCDEFGHIJK"); //print to block 2
+    LCDString("ABCD 1234"); //print to block 2
     __delay_ms(TEST_DELAY);
     LCDFont(LCDFont_Seven_Seg); //font 4
     LCDgotoXY(0, 3);
@@ -321,7 +322,7 @@ void TestFourLoop() {
     LCDClear(0x00);
 
     //Test full size bitmap 504 bytes
-    LCDCustomChar(mybitmap, sizeof (mybitmap) / sizeof (unsigned char), 0x00);
+    LCDCustomChar(fullScreenBitmap, sizeof (fullScreenBitmap) / sizeof (unsigned char), 0x00);
     __delay_ms(5000);
     LCDClear(0x00);
 }

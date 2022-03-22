@@ -2,18 +2,14 @@
  * Project Name: Nokia 5110 ASCII text
  * File: NOKIA5110_TEXT.c
  * Description: Nokia library c file
- * Author: Gavin Lyons.
- * IC: PIC_18F47K42
- * IDE:  MPLAB 5.30 Xc8 2.10
- * Created March 2019
- * Description: See URL for full details.
- * URL: https://github.com/gavinlyonsrepo/pic_18F47K42_projects
  */
 
-#include "NOKIA5110_TEXT.h"
 #include "mcc_generated_files/mcc.h"
 
-uint8_t _contrast = LCD_CONTRAST;
+#include "NOKIA5110_TEXT.h"
+#include "NOKIA5110_TEXT_FONT_DATA.h"
+
+uint8_t _Contrast = LCD_CONTRAST;
 uint8_t _FontNumber = LCDFont_Default;
 uint8_t _bias = LCD_BIAS;
 bool _sleep = false;
@@ -22,12 +18,12 @@ uint8_t _Block = 0;
 uint8_t _Col = 0;
 
 /*Function : LCDinit
-This sends the  commands to the PCD8544 to  init LCD
+This sends the  commands to the PCD8544 to  init the LCD
  */
 void LCDInit(bool Inverse, uint8_t Contrast, uint8_t Bias) {
 
     _inverse = Inverse;
-    _contrast = Contrast;
+    _Contrast = Contrast;
     _bias = Bias;
 
     //Configure control pins
@@ -38,7 +34,7 @@ void LCDInit(bool Inverse, uint8_t Contrast, uint8_t Bias) {
     LCD_RST_SetLow();
     LCD_RST_SetHigh();
     LCDWrite(LCD_COMMAND, LCD_COMMAND_MODE); //Tell LCD that extended commands follow
-    LCDWrite(LCD_COMMAND, _contrast); //Set LCD Vop (Contrast): Try 0xB1(good @ 3.3V) or 0xBF if your display is too dark
+    LCDWrite(LCD_COMMAND, _Contrast); //Set LCD Vop (Contrast): Try 0xB1(good @ 3.3V) or 0xBF if your display is too dark
     LCDWrite(LCD_COMMAND, LCD_TEMP_COEF); //Set Temp coefficent
     LCDWrite(LCD_COMMAND, _bias); //LCD bias mode 1:48: Try 0x13 or 0x14
     LCDWrite(LCD_COMMAND, LCD_FUNCTIONSET); //We must send 0x20 before modifying the display control mode
@@ -106,6 +102,7 @@ void LCDWrite(unsigned char data_or_command, unsigned char data) {
         if (d & 0x80)LCD_DIN_SetHigh(); // b1000000 Mask with 0 & all zeros out.
         LCD_CLK_SetHigh();
         d <<= 1;
+        __delay_us(LCD_HIGH_FREQ_uSDELAY);
         LCD_CLK_SetLow();
     }
     LCD_CE_SetHigh();
@@ -122,7 +119,7 @@ void LCDCharacter(char character) {
             break;
         case LCDFont_Thick: LCDDrawFonts1TO6(character, LCDFont_W_7);
             break;
-        case LCDFont_Aurebesh: LCDDrawFonts1TO6(character, LCDFont_W_5);
+        case LCDFont_HomeSpun: LCDDrawFonts1TO6(character, LCDFont_W_7);
             break;
         case LCDFont_Seven_Seg: LCDDrawFonts1TO6(character, LCDFont_W_4);
             break;
@@ -165,9 +162,9 @@ void LCDSetPixel(uint8_t col, uint8_t row) {
  Set LCD VOP Contrast, range = ((0x00-0x7F) |0x80) 0xB5 = (0x35|0x80) try B1 - BF normally.
  */
 void LCDsetContrast(uint8_t contrast) {
-    _contrast = contrast;
+    _Contrast = contrast;
     LCDWrite(LCD_COMMAND, LCD_COMMAND_MODE); //Tell LCD that extended commands follow
-    LCDWrite(LCD_COMMAND, _contrast); //Set LCD Vop (Contrast):
+    LCDWrite(LCD_COMMAND, _Contrast); //Set LCD Vop (Contrast):
     LCDWrite(LCD_COMMAND, LCD_FUNCTIONSET); //We must send 0x20 before modifying the display control mode
 }
 
@@ -187,7 +184,7 @@ void LCDenableSleep() {
 void LCDdisableSleep() {
     _sleep = false;
     LCDWrite(LCD_COMMAND, LCD_COMMAND_MODE);
-    LCDWrite(LCD_COMMAND, _contrast);
+    LCDWrite(LCD_COMMAND, _Contrast);
     LCDWrite(LCD_COMMAND, LCD_TEMP_COEF);
     LCDWrite(LCD_COMMAND, _bias);
     LCDWrite(LCD_COMMAND, LCD_FUNCTIONSET);
@@ -241,9 +238,9 @@ void LCDDrawFonts1TO6(char character, LCDFontWidth_e font_width) {
                 LCDWrite(LCD_DATA, FontThick[character - LCDFont_O_Space][column]);
 #endif
                 break;
-            case LCDFont_Aurebesh:
-#ifdef NOKIA5110_FONT_Aurebesh
-                LCDWrite(LCD_DATA, FontAurebesh[character - LCDFont_O_Space][column]);
+            case LCDFont_HomeSpun:
+#ifdef NOKIA5110_FONT_HomeSpun
+                LCDWrite(LCD_DATA, FontHomeSpun[character - LCDFont_O_Space][column]);
 #endif
                 break;
             case LCDFont_Seven_Seg:

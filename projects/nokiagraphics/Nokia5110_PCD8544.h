@@ -45,6 +45,8 @@
 #define LCD_SETBIAS  0x13
 #define LCD_SETVOP   0x80
 
+#define LCD_HIGH_FREQ_uSDELAY 1 // US delay used in software SPI , increase for higher MCU freq 
+
 /* --------------- User Functions ------------- */
 void LCDBegin(void);
 void LCDdrawPixel(uint8_t x, uint8_t y, bool color);

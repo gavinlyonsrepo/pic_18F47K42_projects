@@ -124,12 +124,12 @@ void Setup(void) {
     LCDdisplay(); // show splashscreen
     __delay_ms(INITDELAY);
     LCDdisplayClear(); // clears the screen and buffer
-    LED_STATUS_RA0_SetHigh();
+    
 }
 
 void testsleepmode(void) {
     LCDdisplayClear();
-    LED_STATUS_RA0_SetLow();
+    
     display_setCursor(0, 0);
     display_setTextSize(1);
     display_puts("Sleep Mode!\r\n");

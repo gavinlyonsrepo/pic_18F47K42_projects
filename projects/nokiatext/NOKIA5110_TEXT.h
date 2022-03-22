@@ -1,7 +1,7 @@
 /*
  * Project Name: NOKIA5110_TEXT
  * File: NOKIA5110_TEXT.h
- * Description: Nokia library header file ASCII TEXT 
+ * Description: Nokia library header file  
  * Author: Gavin Lyons.
  * URL: https://github.com/gavinlyonsrepo/pic_18F47K42_projects
  */
@@ -14,48 +14,7 @@
 #include <stdbool.h>
 #include "mcc_generated_files/mcc.h"
 
-
 // Section :: Defines 
-// **** FONT DEFINE SECTION ******  
-// Comment in the fonts you want, X_1 is default. 
-#define NOKIA5110_FONT_Default
-#define NOKIA5110_FONT_Thick
-#define NOKIA5110_FONT_Aurebesh
-#define NOKIA5110_FONT_SevenSeg
-#define NOKIA5110_FONT_Wide
-#define NOKIA5110_FONT_Tiny
-#define NOKIA5110_FONT_Large
-#define NOKIA5110_FONT_Huge
-#define NOKIA5110_FONT_Mega
-// **** END OF FONT DEFINE SECTION ******  
-
-#ifdef NOKIA5110_FONT_Default
-#include "NOKIA5110_TEXT_FONT_Default.h" // Default 5X8
-#endif
-#ifdef NOKIA5110_FONT_Thick
-#include "NOKIA5110_TEXT_FONT_Thick.h" // Thick 7X8  (NO LOWERCASE LETTERS)
-#endif
-#ifdef NOKIA5110_FONT_Aurebesh
-#include "NOKIA5110_TEXT_FONT_Aurebesh.h" // Aurebesh 5X8
-#endif
-#ifdef NOKIA5110_FONT_SevenSeg
-#include "NOKIA5110_TEXT_FONT_7Seg.h" //seven segment 4X8
-#endif
-#ifdef NOKIA5110_FONT_Wide
-#include "NOKIA5110_TEXT_FONT_Wide.h" // Wide  8X8 (NO LOWERCASE LETTERS)
-#endif
-#ifdef NOKIA5110_FONT_Tiny
-#include "NOKIA5110_TEXT_FONT_Tiny.h" // Tiny 3X8
-#endif
-#ifdef NOKIA5110_FONT_Large
-#include "NOKIA5110_TEXT_FONT_Large.h" // Large 12 X 16 (no lowercase letters)
-#endif
-#ifdef NOKIA5110_FONT_Huge
-#include "NOKIA5110_TEXT_FONT_Huge.h" // Huge 16 X24 (numbers + . : only) 
-#endif
-#ifdef NOKIA5110_FONT_Mega
-#include "NOKIA5110_TEXT_FONT_Mega.h" // Mega 16 X 32 (numbers + . : / only)
-#endif
 
 //LCD Commands PCD8544_
 #define LCD_COMMAND_MODE 0x21  //FUNCTIONSET + extended instruction
@@ -75,29 +34,30 @@
 #define LCD_X_WIDTH 84
 #define LCD_Y_HEIGHT 48
 
+#define LCD_HIGH_FREQ_uSDELAY 1 // uS delay used in sw SPI at high MC Freq 
 
 // Section :: enums
 
 typedef enum {
-    LCDFont_Default = 1,
-    LCDFont_Thick = 2, // No lowercase letters
-    LCDFont_Aurebesh = 3,
-    LCDFont_Seven_Seg = 4,
-    LCDFont_Wide = 5, // No lowercase letters
-    LCDFont_Tiny = 6,
-    LCDFont_Large = 7, // No lowercase letters
-    LCDFont_Huge = 8, // numbers + . : only
-    LCDFont_Mega = 9 // numbers + . : / only
+    LCDFont_Default = 1, // Default 5X8
+    LCDFont_Thick = 2, // Thick 7X8  (NO LOWERCASE LETTERS)
+    LCDFont_HomeSpun = 3, // homespun 7X8 
+    LCDFont_Seven_Seg = 4, // seven segment 4X8
+    LCDFont_Wide = 5, // Wide  8X8 (NO LOWERCASE LETTERS)
+    LCDFont_Tiny = 6, // tiny 3x8
+    LCDFont_Large = 7, // Large 12 X 16 (no lowercase letters)
+    LCDFont_Huge = 8, // Huge 16 X24 (numbers + . : only) 
+    LCDFont_Mega = 9 // Mega 16 X 32 (numbers + . : / only)
 } LCDFontType_e; // type of font
 
 typedef enum {
     LCDFont_W_3 = 3, // tiny font
     LCDFont_W_4 = 4, // seven segment font
-    LCDFont_W_5 = 5, // Default + aurebesh
-    LCDFont_W_7 = 7, // thick
+    LCDFont_W_5 = 5, // Default 
+    LCDFont_W_7 = 7, // thick + homeSpun
     LCDFont_W_8 = 8, // wide
     LCDFont_W_12 = 12, // large , no lowercase letters
-    LCDFont_W_16 = 16 // mega and  , numbers only
+    LCDFont_W_16 = 16 // mega and huge , numbers only
 } LCDFontWidth_e; // Size width of fonts in pixels, add padding for font_width < 9
 
 typedef enum {
@@ -131,7 +91,7 @@ void LCDFillBlock(uint8_t, uint8_t);
 void LCDCustomChar(const unsigned char character[], uint16_t, LCDPaddingType_e);
 bool LCDIsSleeping(void);
 
-void LCDDrawFonts1TO6(char character, LCDFontWidth_e); //8 bit tall fonts
+void LCDDrawFonts1TO6(char character, LCDFontWidth_e); // 8 bit tall fonts
 void LCDDrawFonts7(char character); // 16 bit tall fonts
 void LCDDrawFonts8TO9(char character); // 24 and 32 bit tall fonts
 
