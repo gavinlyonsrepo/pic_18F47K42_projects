@@ -37,8 +37,6 @@ to the screen at hand for optimal display.
 Run the PIC at 3.3V,  If run at 5V drop voltage logic on control lines to 3.3V.
 A resistor or potentiometer can be connected between (Nokia LCD) GND(pin8) and LIGHT(pin7) to switch on /off backlight and adjust brightness. 
 
-The library has 5 files (main.c, nokia.c, nokia.h, graphics.h, graphics.c).
-
 The main.c contains the demo functions in a test loop showing features of library. 
 
 [Nokia 5110 LCD dataSheet ](https://www.sparkfun.com/datasheets/LCD/Monochrome/Nokia5110.pdf)
