@@ -3,13 +3,14 @@
  * File: main.c
  * Description: Nokia library example test file, runs a series of tests to test library.
  * Author: Gavin Lyons.
+ * URL: https://github.com/gavinlyonsrepo/pic_16F1619_projects
  */
 
 #include "mcc_generated_files/mcc.h"
 #include "NOKIA5110_TEXT.h"
 
 #define inverse  false
-#define contrast 0xBF // default is 0xBF set in LCDinit, Try 0xB1 to 0xBF if your display is too dark
+#define contrast 0xB2 // default is 0xBF set in LCDinit, Try 0xB1 to 0xBF if your display is too dark
 #define bias 0x13 // LCD bias mode 1:48: Try 0x12 or 0x13 or 0x14
 #define TEST_DELAY 2000
 

@@ -3,7 +3,6 @@
  * File: NOKIA5110_TEXT.h
  * Description: Nokia library header file  
  * Author: Gavin Lyons.
- * URL: https://github.com/gavinlyonsrepo/pic_18F47K42_projects
  */
 
 #ifndef NOKIA5110_TEXT_H

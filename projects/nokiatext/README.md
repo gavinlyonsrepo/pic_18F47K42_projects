@@ -24,7 +24,7 @@ This is a PIC version of my [Arduino Library here](https://github.com/gavinlyons
 Main difference between versions, is PIC version is software SPI only.
 The main.c contains a sequence of tests to 
 test library. If a font is not enabled nothing will show for that specific test.
-Fonts are enabled in the font data file by commenting in the relevant defines,
+Fonts are enabled in the font data header file by commenting in the relevant defines,
 see FONT DEFINE SECTION .
 
 MCU running at 12Mhz if you increase frequency user may have to 

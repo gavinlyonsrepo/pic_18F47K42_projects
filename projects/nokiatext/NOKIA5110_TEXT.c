@@ -230,32 +230,32 @@ void LCDDrawFonts1TO6(char character, LCDFontWidth_e font_width) {
         switch (_FontNumber) {
             case LCDFont_Default:
 #ifdef NOKIA5110_FONT_Default
-                LCDWrite(LCD_DATA, FontDefault[character - LCDFont_O_Space][column]);
+                LCDWrite(LCD_DATA, pFontDefaultptr[character - LCDFont_O_Space][column]);
 #endif
                 break;
             case LCDFont_Thick:
 #ifdef NOKIA5110_FONT_Thick
-                LCDWrite(LCD_DATA, FontThick[character - LCDFont_O_Space][column]);
+                LCDWrite(LCD_DATA, pFontThickptr[character - LCDFont_O_Space][column]);
 #endif
                 break;
             case LCDFont_HomeSpun:
 #ifdef NOKIA5110_FONT_HomeSpun
-                LCDWrite(LCD_DATA, FontHomeSpun[character - LCDFont_O_Space][column]);
+                LCDWrite(LCD_DATA, pFontHomeSpunptr[character - LCDFont_O_Space][column]);
 #endif
                 break;
             case LCDFont_Seven_Seg:
 #ifdef NOKIA5110_FONT_SevenSeg
-                LCDWrite(LCD_DATA, FontSevenSegment[character - LCDFont_O_Space][column]);
+                LCDWrite(LCD_DATA, pFontSevenSegptr[character - LCDFont_O_Space][column]);
 #endif
                 break;
             case LCDFont_Wide:
 #ifdef NOKIA5110_FONT_Wide
-                LCDWrite(LCD_DATA, FontWide[character - LCDFont_O_Space][column]);
+                LCDWrite(LCD_DATA, pFontWideptr[character - LCDFont_O_Space][column]);
 #endif
                 break;
             case LCDFont_Tiny:
 #ifdef NOKIA5110_FONT_Tiny
-                LCDWrite(LCD_DATA, FontTiny[character - LCDFont_O_Space][column]);
+                LCDWrite(LCD_DATA, pFontTinyptr[character - LCDFont_O_Space][column]);
 #endif
                 break;
         }
@@ -279,7 +279,7 @@ void LCDDrawFonts7(char character) {
     uint8_t column = 0;
     //print upper byte
     for (column = 0; column < LCDFont_W_12; column++) {
-        totalchar = FontLarge[character - LCDFont_O_Space ][column];
+        totalchar = pFontLargeptr[character - LCDFont_O_Space ][column];
         topchar = totalchar & 0x00FF;
         LCDWrite(LCD_DATA, topchar);
     }
@@ -287,7 +287,7 @@ void LCDDrawFonts7(char character) {
     LCDgotoXY(_Col, _Block + 1);
     //print lowerbyte
     for (column = 0; column < LCDFont_W_12; column++) {
-        totalchar = FontLarge[character - LCDFont_O_Space ][column];
+        totalchar = pFontLargeptr[character - LCDFont_O_Space ][column];
         botchar = (totalchar >> 8) & 0xFF;
         LCDWrite(LCD_DATA, botchar);
     }
@@ -318,11 +318,11 @@ void LCDDrawFonts8TO9(char character) {
     for (column = 0; column < LCDFont_W_16; column++) {
         if (_FontNumber == LCDFont_Huge) {
 #ifdef NOKIA5110_FONT_Huge
-            totaldata = FontHuge[character - LCDFont_O_Number][column];
+            totaldata = pFontHugeptr[character - LCDFont_O_Number][column];
 #endif
         } else {
 #ifdef NOKIA5110_FONT_Mega
-            totaldata = FontMega[character - LCDFont_O_Number][column];
+            totaldata = pFontMegaptr[character - LCDFont_O_Number][column];
 #endif
         }
         topbyte = totaldata & 0xFF;
@@ -335,11 +335,11 @@ void LCDDrawFonts8TO9(char character) {
     for (column = 0; column < LCDFont_W_16; column++) {
         if (_FontNumber == LCDFont_Huge) {
 #ifdef NOKIA5110_FONT_Huge
-            totaldata = FontHuge[character - LCDFont_O_Number][column];
+            totaldata = pFontHugeptr[character - LCDFont_O_Number][column];
 #endif
         } else {
 #ifdef NOKIA5110_FONT_Mega
-            totaldata = FontMega[character - LCDFont_O_Number][column];
+            totaldata = pFontMegaptr[character - LCDFont_O_Number][column];
 #endif
         }
         middleupperbyte = (totaldata >> 8) & 0xFF;
@@ -352,11 +352,11 @@ void LCDDrawFonts8TO9(char character) {
     for (column = 0; column < LCDFont_W_16; column++) {
         if (_FontNumber == LCDFont_Huge) {
 #ifdef NOKIA5110_FONT_Huge
-            totaldata = FontHuge[character - LCDFont_O_Number][column];
+            totaldata = pFontHugeptr[character - LCDFont_O_Number][column];
 #endif
         } else {
 #ifdef NOKIA5110_FONT_Mega
-            totaldata = FontMega[character - LCDFont_O_Number][column];
+            totaldata = pFontMegaptr[character - LCDFont_O_Number][column];
 #endif
         }
         middlelowerbyte = (totaldata >> 16) & 0xFF;
@@ -371,7 +371,7 @@ void LCDDrawFonts8TO9(char character) {
         LCDgotoXY(_Col, _Block + 1); //goto next block
         for (column = 0; column < LCDFont_W_16; column++) {
 #ifdef NOKIA5110_FONT_Mega
-            totaldata = FontMega[character - LCDFont_O_Number][column];
+            totaldata = pFontMegaptr[character - LCDFont_O_Number][column];
             lowerbyte = (totaldata >> 24) & 0xFF;
             LCDWrite(LCD_DATA, lowerbyte);
 #endif
