@@ -1,18 +1,6 @@
-/*
-* Project Name: Nokia  5110 Graphic library for PIC  micro-controller
-* File: NOKIA.c
-* Description: Source file for NOKIA 5110 library to communicate with LCDs, software SPI.
-* PCD8544 controller.
-* Author: Gavin Lyons.
-* Compiler: xc8 v2.10 compiler
-* PIC: PIC18F47K42
-* IDE:  MPLAB X v5.30
-* Created: July 2020
-* Description: See URL for full details.
-* URL: https://github.com/gavinlyonsrepo/pic_18F47K42_projects
-*/
 
 #include "Nokia5110_PCD8544.h"
+
 
 /* 
    Desc:  This sends the  commands to the PCD8544 to  init LCD, Note Software SPI
@@ -89,7 +77,7 @@ void LCDdisplay_setContrast(uint8_t con) {
  Desc: Writes the buffer to the LCD
  */
 void LCDdisplay(void) {
-  uint16_t i;
+  int16_t i;
   LCDwriteCommand(LCD_SETYADDR);  // set y = 0
   LCDwriteCommand(LCD_SETXADDR);  // set x = 0
 
@@ -106,14 +94,14 @@ void LCDdisplay(void) {
 /* 
  Desc: The most basic function, set a single pixel
  */
-void LCDdrawPixel(uint8_t x, uint8_t y, bool color) {
+void LCDdrawPixel(int16_t x, int16_t y, bool color) {
 
   if ( (x >= _width_LCD) || (y >= _height_LCD) )
     return;
 
   switch(_rotation_LCD) {
     case 1:
-      _swap_int8_t_LCD(x, y);
+      _swap_int16_t_LCD(x, y);
       y =  LCDHEIGHT - 1 - y;
       break;
     case 2:
@@ -121,7 +109,7 @@ void LCDdrawPixel(uint8_t x, uint8_t y, bool color) {
       y = LCDHEIGHT - 1 - y;
       break;
     case 3:
-      _swap_int8_t_LCD(x, y);
+      _swap_int16_t_LCD(x, y);
       x = LCDWIDTH - 1 - x;
   }
 
@@ -129,10 +117,10 @@ void LCDdrawPixel(uint8_t x, uint8_t y, bool color) {
     return;
 
   if (color)
-    pcd8544_buffer[x + (uint16_t)(y / 8) * LCDWIDTH] |=  (1 << (y & 7));
+    pcd8544_buffer[x + (int16_t)(y / 8) * LCDWIDTH] |=  (1 << (y & 7));
 
   else
-    pcd8544_buffer[x + (uint16_t)(y / 8) * LCDWIDTH] &=  ~(1 << (y & 7));
+    pcd8544_buffer[x + (int16_t)(y / 8) * LCDWIDTH] &=  ~(1 << (y & 7));
 }
 
 
@@ -141,7 +129,7 @@ void LCDdrawPixel(uint8_t x, uint8_t y, bool color) {
  Desc: Writes the buffer (full of zeros) to the LCD
  */
 void LCDdisplayClear(void) {
-  uint16_t i;
+  int16_t i;
   for (i = 0; i < 504; i++)  // 504 = LCDWIDTH*LCDHEIGHT / 8
     pcd8544_buffer[i] = 0;
 }
@@ -150,7 +138,7 @@ void LCDdisplayClear(void) {
  Desc: Writes the buffer (full of ones(0xFF)) to the LCD
  */
 void LCDfillScreen() {
-  uint16_t i;
+  int16_t i;
   for (i = 0; i < 504; i++)  // 504 = LCDWIDTH*LCDHEIGHT / 8
     pcd8544_buffer[i] = 0xFF;
 }

@@ -2,10 +2,9 @@
  * Project Name: Nokia 5110 Graphic library for PIC  microcontroller
  * File: main.c
  * Description: Main  File to run a series of tests
- * Complier: xc8 v2.10 compiler
+ * Complier: xc8 v2.40 compiler
  * PIC: PIC18F47K42
- * IDE:  MPLAB X v5.30
- * Created: July 2020
+ * IDE:  MPLAB X v6.00
  * Description: See URL for full details.
  * URL: https://github.com/gavinlyonsrepo/pic_18F47K42_projects
  */
@@ -16,49 +15,24 @@
 #include "Display_Graphics.h"  // include graphics library source code
 
 /* ----------- Defines -----------*/
-#define TESTDELAY 2000 // mS
+#define TESTDELAY 5000 // mS
 #define INITDELAY 2000 // mS
 #define CONTRAST  0x32 // 0x30 to 0x3F possible values
 #define LINEDRAWDELAY 250 // mS
-
-// needed for bitmap tests
-#define NUMFLAKES 10
-#define XPOS 0
-#define YPOS 1
-#define DELTAY 2
-#define FLAKE_HEIGHT 16
-#define FLAKE_WIDTH  16
-
-/*-----------Globals---------*/
-const uint8_t Flake_bmp[] ={0b00000000, 0b00000000,
-    0b00000000, 0b00000000,
-    0b00000001, 0b10000000,
-    0b00000000, 0b00000000,
-    0b00001101, 0b00100000,
-    0b00001111, 0b01100000,
-    0b00000011, 0b10000000,
-    0b00000001, 0b10000000,
-    0b00001011, 0b11010000,
-    0b00000101, 0b00100000,
-    0b00000001, 0b00110000,
-    0b00000001, 0b00000000,
-    0b00000001, 0b10000000,
-    0b00000000, 0b00000000,
-    0b00000000, 0b00000000,
-    0b00000000, 0b00000000};
-
 
 /* -------- Function prototypes -------- */
 void Setup(void);
 void screenreset(void);
 
+void testfonts(void);
 void textdrawpixel(void);
 void testfillscreen(void);
 void testsleepmode(void);
 void testdrawcircle(void);
+void testFillCircle(void);
 void testdrawline(void);
 void testdrawchar(void);
-void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h);
+void testdrawbitmap(void);
 void testfillrect(void);
 void testdrawtriangle(void);
 void testfilltriangle(void);
@@ -67,12 +41,14 @@ void testfillroundrect(void);
 void testdrawrect(void);
 void testRotate(void);
 void testTextModes(void);
+void testInvert(void);
 
 /* ------------ Main application --------------  */
 void main(void) {
     Setup();
-    while (1) {
-
+    while (1) 
+    {
+        testfonts();     //    0. Test fonts
         textdrawpixel(); //    1. Draw single Pixel
         testfillscreen(); //   1a. Fill screen
         testsleepmode(); //    1c. sleep mode
@@ -80,35 +56,18 @@ void main(void) {
         testdrawrect(); //     3. Draw rectangles
         testfillrect(); //     4. Draw multiple rectangles
         testdrawcircle(); //   5.  Draw multiple circles
-
-        // 6. Draw a circle, 10 pixel radius
-        display_fillCircle(display_width / 2, display_height / 2, 10, LCD_BLACK);
-        screenreset();
-
+        testFillCircle(); //   6. draw fill  circle
         testdrawroundrect(); // 7. Draw a rounded rectangle
         testfillroundrect(); // 8. Fill a rounded rectangle
         testdrawtriangle(); //  9. Draw a triangle
-        testfilltriangle(); // 10. Fill a triangle
-        testdrawchar(); //     11. draw the first characters in the ASCII font
-        testTextModes(); //    12. Text display tests
+        testfilltriangle(); //  10. Fill a triangle
+        testdrawchar(); //      11. draw the first characters in the ASCII font
+        testTextModes(); //     12. Text display tests
         testRotate(); //        13. Rotation example
-
-        //  14. Miniature bitmap display
-        LCDdisplayClear();
-        display_drawBitmapV2(30, 16, Flake_bmp, 16, 16, LCD_BLACK);
-        LCDdisplay();
-
-        //  15. Invert the display
-        display_invert(true);
-        __delay_ms(2000);
-        display_invert(false);
-        __delay_ms(2000);
-
-        //  16. Draw a bitmap icon and animate movement
-        testdrawbitmap(Flake_bmp, FLAKE_WIDTH, FLAKE_HEIGHT);
-        
+        testInvert(); //        14. Invert the display
+        testdrawbitmap();  //   15. test bitmap        
     } // test while loop
-} // main
+}
 /* ------------------ End of main ------------ */
 
 /* ----------------- function space -----------*/
@@ -121,10 +80,30 @@ void Setup(void) {
     //INTERRUPT_GlobalInterruptDisable();
     LCDBegin();
     LCDdisplay_setContrast(CONTRAST);
-    LCDdisplay(); // show splashscreen
+    LCDdisplay(); // show splash screen
     __delay_ms(INITDELAY);
     LCDdisplayClear(); // clears the screen and buffer
     
+}
+
+void testInvert(void)
+{
+    LCDdisplayClear();
+    display_setCursor(0, 0);
+    display_puts("Invert!\r\n");
+    LCDdisplay();
+    __delay_ms(2000);
+    display_invert(true);
+    __delay_ms(2000);
+    display_invert(false);
+    __delay_ms(2000);
+    LCDdisplayClear();
+}
+
+void testFillCircle(void)
+{
+    display_fillCircle(display_width / 2, display_height / 2, 10, LCD_BLACK);
+    screenreset();
 }
 
 void testsleepmode(void) {
@@ -183,48 +162,46 @@ void testRotate(void) {
 
 void textdrawpixel(void) {
     display_drawPixel(10, 10, LCD_BLACK);
-    LCDdisplay();
-    __delay_ms(TESTDELAY);
-    LCDdisplayClear();
+    display_drawPixel(20, 10, LCD_BLACK);
+    display_drawPixel(30, 10, LCD_BLACK);
+    screenreset();
 }
 
-void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h) {
-    static uint8_t icons[NUMFLAKES][3], f, x_pos, y_pos;
+void testdrawbitmap() {
+    // snow flake 16x16 horizontally addressed
+    const uint8_t Flake_bmp[] =
+    {
+        0x00, 0x00, 0x00, 0x00, 0x01, 0x80, 
+        0x00, 0x00, 0x0D, 0x20, 0x0F, 0x60, 
+        0x03, 0x80, 0x01, 0x80, 0x0B, 0xD0,
+        0x05, 0x20, 0x01, 0x30, 0x01, 0x00, 
+        0x01, 0x80, 0x00, 0x00, 0x00, 0x00, 
+        0x00, 0x00
+    };
+    
+    // Mobile Signal 16x8px horizontally addressed
+    const uint8_t SignalIcon[16] = 
+    {
+        0xFE,0x02,0x92,0x0A,0x54,0x2A,0x38,0xAA,0x12,0xAA,0x12,0xAA,0x12,0xAA,0x12,0xAA
+    };
 
-    // initialize
-    for (f = 0; f < NUMFLAKES; f++) {
-        icons[f][XPOS] = rand();
-        icons[f][YPOS] = 0;
-        icons[f][DELTAY] = (rand() % 5) + 1;
-    }
-    icons[0][XPOS] = 30;
+    // Message icon  16x8px horizontally addressed
+    const uint8_t MsgIcon[16] =  
+    {
+        0x1F,0xF8,0x10,0x08,0x18,0x18,0x14,0x28,0x13,0xC8,0x10,0x08,0x10,0x08,0x1F,0xF8
+    };
 
-    while (1) {
-        uint8_t f;
-        // draw each icon
-        for (f = 0; f < NUMFLAKES; f++) {
-            x_pos = icons[f][XPOS];
-            y_pos = icons[f][YPOS];
-            display_drawBitmapV2(x_pos, y_pos, bitmap, w, h, LCD_BLACK);
-        }
-        LCDdisplay();
-        __delay_ms(200);
+    // Battery Icon  16x8px  horizontally addressed
+    const uint8_t BatIcon[16] = 
+    {
+        0x0F,0xFE,0x30,0x02,0x26,0xDA,0x26,0xDA,0x26,0xDA,0x26,0xDA,0x30,0x02,0x0F,0xFE
+    };
 
-        // then erase it + move it
-        for (f = 0; f < NUMFLAKES; f++) {
-            x_pos = icons[f][XPOS];
-            y_pos = icons[f][YPOS];
-            display_drawBitmapV2(x_pos, y_pos, bitmap, w, h, LCD_WHITE);
-            // move it
-            icons[f][YPOS] += icons[f][DELTAY];
-            // if its gone, reinit
-            if (icons[f][YPOS] > display_height) {
-                icons[f][XPOS] = rand();
-                icons[f][YPOS] = 0;
-                icons[f][DELTAY] = (rand() % 5) + 1;
-            }
-        }
-    }
+    display_drawBitmap(20, 20, Flake_bmp, 16, 16, LCD_BLACK);
+    display_drawBitmap(0, 0, SignalIcon, 16, 8, LCD_BLACK);
+    display_drawBitmap(40, 0, MsgIcon, 16, 8, LCD_BLACK);
+    display_drawBitmap(68, 0, BatIcon, 16, 8, LCD_BLACK);
+    screenreset();
 }
 
 void testdrawchar(void) {
@@ -264,11 +241,9 @@ void testdrawchar(void) {
 }
 
 void testdrawcircle(void) {
-    char i;
-    for (i = 0; i < display_height; i += 2) {
-        display_drawCircle(display_width / 2, display_height / 2, i, LCD_BLACK);
-        LCDdisplay();
-    }
+    display_drawCircle(display_width / 2, display_height / 2, 10, LCD_BLACK);
+    display_drawCircle(display_width / 2, display_height / 2, 15, LCD_BLACK);
+    display_drawCircle(display_width / 2, display_height / 2, 20, LCD_BLACK);
     screenreset();
 }
 
@@ -296,7 +271,8 @@ void testdrawtriangle(void) {
 }
 
 void testfilltriangle(void) {
-    short i, color = LCD_BLACK;
+    int16_t i; 
+    uint8_t color = LCD_BLACK;
     for (i = _min_LCD(display_width, display_height) / 2; i > 0; i -= 5) {
         display_fillTriangle(display_width / 2, display_height / 2 - i,
                 display_width / 2 - i, display_height / 2 + i,
@@ -340,7 +316,7 @@ void testdrawrect(void) {
 }
 
 void testdrawline(void) {
-    short i;
+    int16_t i;
     for (i = 0; i < display_width; i += 4) {
         display_drawLine(0, 0, i, display_height - 1, LCD_BLACK);
         LCDdisplay();
@@ -396,5 +372,48 @@ void screenreset(void) {
     LCDdisplay();
     __delay_ms(TESTDELAY);
     LCDdisplayClear();
+}
+
+void testfonts(void)
+{
+    display_setTextSize(1);
+    display_setTextColor(LCD_BLACK, LCD_WHITE);
+    
+    // Font 1 default
+    display_setCursor(0, 0);
+    display_Font(LCDFontType_Default);
+    display_puts("Hello world!\r\n");  
+    // Font 2 thick
+    display_setCursor(0, 9);
+    display_Font(LCDFontType_Thick);
+    display_puts("123THICK!");
+    // Font 3 homespun
+    display_setCursor(0, 18);
+    display_Font(LCDFontType_HomeSpun);
+    display_puts("123 Home");
+    // Font 4 seven segment
+    display_setCursor(0, 26);
+    display_Font(LCDFontType_SevenSeg);
+    display_puts("192 Seven");
+    // Font 5 wide
+    display_setCursor(0, 34);
+    display_Font(LCDFontType_Wide);
+    display_puts("196 WIDE");
+    // Font 6 tiny 
+    display_setCursor(0, 42);
+    display_Font(LCDFontType_Tiny);
+    display_puts("196 tiny");
+    screenreset();
+     
+    // size 2
+    display_setTextSize(2);
+    display_setCursor(0, 0);
+    display_Font(LCDFontType_Thick);
+    display_puts("THICK");
+    display_setCursor(0, 24);
+    display_Font(LCDFontType_SevenSeg);
+    display_puts("1234");
+    screenreset();
+    display_Font(LCDFontType_Default);
 }
 /*----------------------- End of File ---------------------------*/

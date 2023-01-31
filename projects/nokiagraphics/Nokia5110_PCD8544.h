@@ -1,12 +1,8 @@
 /*
 * Project Name: Nokia  5110 Graphic library for PIC  micro-controller
-* File: NOKIA.h 
+* File: NOKIA5110_PCD8544.h 
 * Description: Header file for NOKIA 5110 library to communicate with LCD
 * Author: Gavin Lyons.
-* Compiler: xc8 v2.10 compiler
-* PIC: PIC18F47K42
-* IDE:  MPLAB X v5.30
-* Created: July 2020
 * Description: See URL for full details.
 * URL: https://github.com/gavinlyonsrepo/pic_18F47K42_projects
 */
@@ -49,7 +45,7 @@
 
 /* --------------- User Functions ------------- */
 void LCDBegin(void);
-void LCDdrawPixel(uint8_t x, uint8_t y, bool color);
+void LCDdrawPixel(int16_t x, int16_t y, bool color);
 
 void LCDsetRotation(uint8_t m);
 void LCDdisplay_setContrast(uint8_t con);
@@ -66,6 +62,7 @@ void LCDwriteCommand(uint8_t c);
 
 /* ----------- Variables --------- */
 #define _swap_int8_t_LCD(a, b) { uint8_t t = a; a = b; b = t; }
+#define _swap_int16_t_LCD(a, b) { int16_t t = a; a = b; b = t; }
 
 uint8_t _width_LCD;
 uint8_t _height_LCD; 
