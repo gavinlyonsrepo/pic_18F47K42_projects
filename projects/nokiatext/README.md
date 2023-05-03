@@ -6,12 +6,11 @@ Table of contents
   * [Features](#features)
   * [Fonts](#fonts)
   * [Memory](#memory)
-  * [Other Versions](#other-versions)
   
 Overview
 --------------------
 * Name : NOKIA5110_TEXT
-* Title : LNokia 5110 library LCD display (PCD8544) 
+* Title : Nokia 5110 library LCD display (PCD8544) 
 * Author: Gavin Lyons
 * Pic:  pic18F47k42
 * Toolchain: xc8 v2.36 , MPLABX IDE v6.00 , MCC v5
@@ -61,9 +60,4 @@ Results of when main.c test demo file is complied.
 * Program space used (9.4%)
 * Data space    used     (0.5%)
 
-
-Other Versions
--------------------------------------
-
-1. Graphics  library for the NOKIA 5110 XC8 PIC [PIC18F47K42.](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/tree/master/projects/nokiagraphics) 
 

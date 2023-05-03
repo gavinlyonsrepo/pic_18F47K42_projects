@@ -1,3 +1,11 @@
+
+  * [Overview](#overview)
+  * [Installation](#installation)
+  * [Software](#software)
+  * [Hardware](#hardware)
+  * [Output](#output)
+  * [Notes](#notes)
+
 Overview
 --------------------------------------------
 * Name: OLED_GRAPH
@@ -9,15 +17,9 @@ Overview
 * PIC: PIC18F47K42
 * IDE:  MPLAB X v5.30
 
-Features
-----------------------
 
-The I2C code and pin config generated using the MPLAB Code Configurator is in a folder called mcc_generated_files. 
-There is  an OLED library in files (SSD1306OLED.c and SSD1306OLED.h),
-and a TextFonts.h file that contains three ASCII pixel fonts.
-Bitmap data used by test file is in a separate file. 
-Main.c  contains a list of test routines to test library. 
-
+Hardware
+---------------
 1. RB2 = SDA OLED
 2. RB1 = SCLK OLED
 
@@ -25,6 +27,13 @@ The SSD1306 OLED display communicates with the master device over I2C mode.
 It is controlled via the two pin I2C bus. Both pins must be held logic high by pull-up resistors,
 if absent from module
 
+Software
+-------------------------
+The I2C code and pin config generated using the MPLAB Code Configurator is in a folder called mcc_generated_files. 
+There is  an OLED library in files (SSD1306OLED.c and SSD1306OLED.h),
+and a TextFonts.h file that contains three ASCII pixel fonts.
+Bitmap data used by test file is in a separate file. 
+Main.c  contains a list of test routines to test library. 
 The library can  display Graphics, text and bitmaps.
 Inverse, sleep , contrast, rotate and scroll functions included.
 
@@ -59,3 +68,9 @@ Output
 3. Bitmap example.
 
 ![ output ](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/blob/master/images/oledgraph.jpg)
+
+Notes
+----------------------
+
+There is a light version of this library, OLED I2C SSD1306 controller library (ASCII, text only) 
+in repository  as well  [here.](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/tree/master/projects/OLED_LM35)

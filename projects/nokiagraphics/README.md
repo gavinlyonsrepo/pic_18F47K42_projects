@@ -6,6 +6,7 @@ Table of contents
   * [Hardware](#hardware)
   * [Software](#software)
   * [Output](#output)
+  * [Notes](#notes)
   
 Overview
 --------------------------------------------
@@ -71,3 +72,8 @@ Output
 3. Shapes example, full graphics class included.
 
 ![OUTPUT](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/blob/master/images/nokiagraph1.jpg)
+
+Notes
+-------------------------------
+
+There is a light version of this library, Nokia 5110 LCD PCD8544 controller library (ASCII, text only  in repository  as well  [here.](https://github.com/gavinlyonsrepo/pic_18F47K42_projects/tree/master/projects/nokiatext)
