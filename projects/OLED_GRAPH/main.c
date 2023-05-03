@@ -15,7 +15,6 @@
 // ************ Libs ****************
 #include "mcc_generated_files/mcc.h"
 #include "SSD1306OLED.h"
-#include "TextFonts.h"
 #include "BitmapTestData.h" 
 
 //*************** Defines *************
@@ -118,28 +117,28 @@ void Test0(void){
 void Test1A(void)
 {
 #if defined SSD1306_128_64
-    SSD1306_SetFont(PICO);
+    SSD1306_SetFont(pFontPicoptr);
     SSD1306_Write_Text( 0, 0, "PICO");
     SSD1306_Write_Text( 0, 8, "12345678901234567890123456789012");
-    SSD1306_SetFont(UNO);
+    SSD1306_SetFont(pFontUnoptr);
     SSD1306_Write_Text( 0, 15, "UNO");
     SSD1306_Write_Text( 0, 24, "123456789012345678901");
-    SSD1306_SetFont(MEGA);
+    SSD1306_SetFont(pFontMegaptr);
     SSD1306_Write_Text( 0, 33, "MEGA");
     SSD1306_Write_Text( 0, 49, "12345678");  
     TestResetScreen();
 #endif 
     
 #if defined SSD1306_128_32
-    SSD1306_SetFont(PICO);
+    SSD1306_SetFont(pFontPicoptr);
     SSD1306_Write_Text( 0, 0, "PICO");
     SSD1306_Write_Text( 0, 8, "12345678901234567890123456789012");
-    SSD1306_SetFont(UNO);
+    SSD1306_SetFont(pFontUnoptr);
     SSD1306_Write_Text( 0, 15, "UNO");
     SSD1306_Write_Text( 0, 24, "123456789012345678901");
     TestResetScreen();
     
-    SSD1306_SetFont(MEGA);
+    SSD1306_SetFont(pFontMegaptr);
     SSD1306_Write_Text( 0, 0, "MEGA");
     SSD1306_Write_Text( 0, 17, "12345678"); 
     TestResetScreen();
@@ -149,7 +148,7 @@ void Test1A(void)
 void Test1B(void)
 {
 
-    SSD1306_SetFont(PICO);
+    SSD1306_SetFont(pFontPicoptr);
     SSD1306_Write_Text( 0, 0, "ABCDEFGHIJKLOMNPQRSTUVWXYZ");
     SSD1306_Write_Text( 0, 7, "12345678901234567890123456789012");
     SSD1306_Write_Text( 0, 14, "abcdefghijklmnopqrstuvwxyz");
@@ -166,7 +165,7 @@ void Test1B(void)
 
 void Test1C(void)
 {
-    SSD1306_SetFont(UNO);
+    SSD1306_SetFont(pFontUnoptr);
     SSD1306_Write_Text( 0, 0, "123456789012345678901");
     SSD1306_Write_Text( 0, 9, "abcdefghijklmnopqrstu");
     SSD1306_Write_Text( 0, 18, "ABCDEFGHIJKLMNOPQRSTU");
@@ -181,7 +180,7 @@ void Test1C(void)
 
 void Test1D(void)
 {
-    SSD1306_SetFont(MEGA);
+    SSD1306_SetFont(pFontMegaptr);
     SSD1306_Write_Text( 0, 0,  "12345678");
     SSD1306_Write_Text( 0, 16, "ABCDEFGH");
  #if defined SSD1306_128_64   
@@ -194,69 +193,69 @@ void Test1D(void)
 
 void Test2(void)
 {
-    SSD1306_BitmapBuffer(10, 10, myImage20x20, 20, 20, WHITE);
+    SSD1306_BitmapBuffer(10, 10, pBitmapMyImage20x20tptr, 20, 20, SSD1306_WHITE);
     TestResetScreen();
 }
 
 void Test3(void)
 {
-    SSD1306_SetPixel(120, 5, WHITE);
-    SSD1306_Line( 5, 5, 90, 15, WHITE);
-    SSD1306_V_Line( 0, 20, 30, WHITE);
-    SSD1306_H_Line( 10, 20, 50, WHITE);  
+    SSD1306_SetPixel(120, 5, SSD1306_WHITE);
+    SSD1306_Line( 5, 5, 90, 15, SSD1306_WHITE);
+    SSD1306_V_Line( 0, 20, 30, SSD1306_WHITE);
+    SSD1306_H_Line( 10, 20, 50, SSD1306_WHITE);  
     TestResetScreen();
 }
 
 void Test4a(void)
 {
-   SSD1306_Rectangle( 1, 1, 20, 20, WHITE);
+   SSD1306_Rectangle( 1, 1, 20, 20, SSD1306_WHITE);
 }
 
 
 void Test4b(void)
 {
-    SSD1306_Triangle( 31, 31, 20, 31, 31, 20, WHITE);
+    SSD1306_Triangle( 31, 31, 20, 31, 31, 20, SSD1306_WHITE);
 }
 
 
 void Test4c(void)
 {
-    SSD1306_Circle( 90, 20, 10 , WHITE);
+    SSD1306_Circle( 90, 20, 10 , SSD1306_WHITE);
     TestResetScreen();
 }
 
 void Test5a(void)
 {
-   SSD1306_FillRectangle( 1, 1, 20, 20, WHITE);
+   SSD1306_FillRectangle( 1, 1, 20, 20, SSD1306_WHITE);
 }
 
 
 void Test5b(void)
 {
-    SSD1306_FillTriangle( 31, 31, 20, 31, 31, 20, WHITE);
+    SSD1306_FillTriangle( 31, 31, 20, 31, 31, 20, SSD1306_WHITE);
 }
 
 
 void Test5c(void)
 {
-    SSD1306_FillCircle( 90, 20, 10 , WHITE);
+    SSD1306_FillCircle( 90, 20, 10 , SSD1306_WHITE);
     TestResetScreen();
 }
 
 void Test6(void)
 {
-    SSD1306_FillRoundRect(40, 10, 20, 20, 5, WHITE);
-    SSD1306_DrawRoundRect(80, 10, 20, 20, 5, WHITE);
+    SSD1306_FillRoundRect(40, 10, 20, 20, 5, SSD1306_WHITE);
+    SSD1306_DrawRoundRect(80, 10, 20, 20, 5, SSD1306_WHITE);
     TestResetScreen();
 }
 
 void Test7(void)
 {
 #if defined SSD1306_128_32
-    SSD1306_Bitmap(myImage128x32);
+    SSD1306_Bitmap(pBitmapMyImage128x32ptr);
 #endif
 #if defined SSD1306_128_64 
-        SSD1306_Bitmap(myImage128x64);
+        SSD1306_Bitmap(pBitmapMyImage128x64ptr);
 #endif
     TestResetScreen();
 }
@@ -269,7 +268,7 @@ void Test7(void)
 //  (5) Rotate 
 void Test8(void)
 {
-    SSD1306_SetFont(MEGA);
+    SSD1306_SetFont(pFontMegaptr);
     
     // test fill
     SSD1306_FillBuffer(0xFF);
@@ -337,7 +336,7 @@ void Test8(void)
     SSD1306_FillBuffer(0x00);
     
     // Rotate 0-4
-    SSD1306_SetFont(UNO);
+    SSD1306_SetFont(pFontUnoptr);
     SSD1306_setRotation(1);
 	SSD1306_Write_Text( 5, 15,  "R1");
 	SSD1306_UpdateDisplay();
@@ -367,7 +366,7 @@ void Test8(void)
 
 void Test9(void)
 {
-       SSD1306_SetFont(MEGA);
+       SSD1306_SetFont(pFontMegaptr);
        SSD1306_InvertFont( true ); //invert text test
        SSD1306_Write_Text( 0, 0, "TESTOVER");
        SSD1306_UpdateDisplay();

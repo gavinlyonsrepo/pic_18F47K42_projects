@@ -18,7 +18,23 @@
 
 
 // *********** Private Variables ***********
+typedef struct _Selected_Font_s
+{
+  const uint8_t *font;        // Fonts Stored are Const
+  uint8_t x_size;
+  uint8_t y_size;
+  uint8_t offset;
+  uint8_t numchars;
+  uint8_t inverted;
+} Selected_Font_s;
+
+
 static Selected_Font_s sfont;
+
+uint8_t _rotation=0; // 0-3
+int16_t _width, _height; // Display w/h as modified by current rotation 
+        
+
 
 // ************** Memory Buffer Display ****
 static uint8_t buffer[SSD1306_HEIGHT * SSD1306_WIDTH / 8] ={
@@ -287,11 +303,11 @@ void SSD1306_SetPixel(int16_t x, int16_t y, uint8_t color) {
     }
 
     switch (color) {
-        case WHITE: buffer[x + (y / 8) * SSD1306_WIDTH] |= (1 << (y & 7));
+        case SSD1306_WHITE: buffer[x + (y / 8) * SSD1306_WIDTH] |= (1 << (y & 7));
             break;
-        case BLACK: buffer[x + (y / 8) * SSD1306_WIDTH] &= ~(1 << (y & 7));
+        case SSD1306_BLACK: buffer[x + (y / 8) * SSD1306_WIDTH] &= ~(1 << (y & 7));
             break;
-        case INVERSE: buffer[x + (y / 8) * SSD1306_WIDTH] ^= (1 << (y & 7));
+        case SSD1306_INVERSE: buffer[x + (y / 8) * SSD1306_WIDTH] ^= (1 << (y & 7));
             break;
     }
 }
@@ -426,16 +442,16 @@ void SSD1306_FillTriangle(int16_t x0, int16_t y0,
     int16_t a, b, y, last;
 
     if (y0 > y1) {
-        swap(y0, y1);
-        swap(x0, x1);
+        SSD1306_swap(y0, y1);
+        SSD1306_swap(x0, x1);
     }
     if (y1 > y2) {
-        swap(y2, y1);
-        swap(x2, x1);
+        SSD1306_swap(y2, y1);
+        SSD1306_swap(x2, x1);
     }
     if (y0 > y1) {
-        swap(y0, y1);
-        swap(x0, x1);
+        SSD1306_swap(y0, y1);
+        SSD1306_swap(x0, x1);
     }
 
     if (y0 == y2) {
@@ -468,7 +484,7 @@ void SSD1306_FillTriangle(int16_t x0, int16_t y0,
         sa += dx01;
         sb += dx02;
   
-        if (a > b) swap(a, b);
+        if (a > b) SSD1306_swap(a, b);
         SSD1306_H_Line(a, y, b - a + 1, color);
     }
 
@@ -479,7 +495,7 @@ void SSD1306_FillTriangle(int16_t x0, int16_t y0,
         b = x0 + sb / dy02;
         sa += dx12;
         sb += dx02;
-        if (a > b) swap(a, b);
+        if (a > b) SSD1306_swap(a, b);
         SSD1306_H_Line(a, y, b - a + 1, color);
     }
 }
@@ -739,9 +755,9 @@ void SSD1306_Write_Text(int16_t x, int16_t y, char *text) {
     uint8_t count;
     uint8_t length;
     length = strlen((const char*) text);
-    if (x == RIGHT)
+    if (x == SSD1306_RIGHT)
         x = SSD1306_WIDTH - (length * sfont.x_size);
-    if (x == CENTER)
+    if (x == SSD1306_CENTER)
         x = (SSD1306_WIDTH - (length * sfont.x_size)) / 2;
     for (count = 0; count < length; count++)
         SSD1306_Write(x + (count * (sfont.x_size)), y, *text++);

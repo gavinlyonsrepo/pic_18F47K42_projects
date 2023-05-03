@@ -16,21 +16,7 @@
 
 // ************ Libs ****************
 #include "mcc_generated_files/mcc.h"
-
-// **** GLOBALS *****
-
-uint8_t _rotation=0; // 0-3
-int16_t _width, _height; // Display w/h as modified by current rotation 
-        
-typedef struct _Selected_Font_s
-{
-  const uint8_t *font;        // Fonts Stored are Const
-  uint8_t x_size;
-  uint8_t y_size;
-  uint8_t offset;
-  uint8_t numchars;
-  uint8_t inverted;
-} Selected_Font_s;
+#include "TextFonts.h"
 
 // ******* SSD1306 Display Type **********
 // ******* USER OPTION SELECTION *********
@@ -59,13 +45,13 @@ typedef struct _Selected_Font_s
   #define SSD1306_CLEAR_SIZE             192
 #endif
 
-#define LEFT                  0
-#define RIGHT                 254
-#define CENTER                255
+#define SSD1306_LEFT                  0
+#define SSD1306_RIGHT                 254
+#define SSD1306_CENTER                255
 
-#define BLACK                 0
-#define WHITE                 1
-#define INVERSE               2
+#define SSD1306_BLACK                 0
+#define SSD1306_WHITE                 1
+#define SSD1306_INVERSE               2
 
 // ***********  SSD1306 Command Set   ***********
 
@@ -116,7 +102,7 @@ typedef struct _Selected_Font_s
 #define SSD1306_DATA_CONTINUE               0x40
 #define SSD1306_ADDR          0x3C //0x3D
 
-#define swap(a, b) { int16_t t = a; a = b; b = t; }
+#define SSD1306_swap(a, b) { int16_t t = a; a = b; b = t; }
 
 // ******** Function Prototypes  *****************
 

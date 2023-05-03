@@ -31,13 +31,13 @@ Software
 -------------------------
 The I2C code and pin config generated using the MPLAB Code Configurator is in a folder called mcc_generated_files. 
 There is  an OLED library in files (SSD1306OLED.c and SSD1306OLED.h),
-and a TextFonts.h file that contains three ASCII pixel fonts.
-Bitmap data used by test file is in a separate file. 
+and a TextFonts.c file that contains three ASCII pixel fonts.
+Bitmap data used by test file are in separate file's. 
 Main.c  contains a list of test routines to test library. 
 The library can  display Graphics, text and bitmaps.
 Inverse, sleep , contrast, rotate and scroll functions included.
 
-There is a USER OPTION SELECTION scetion by top of header file to select screen size 
+There is a USER OPTION SELECTION section by top of header file to select screen size 
 3 options. Select your screen size here.
 
 1. 128X64 (default)
@@ -46,9 +46,9 @@ There is a USER OPTION SELECTION scetion by top of header file to select screen 
 
 **Fonts** 
 
-1. PICO font X by Y  = 4 by 6 . 288 characters.
-2. UNO font X by Y = 6 by 8 . 147 characters.
-3. MEGA font X by Y  = 16 by 16 . 32 characters
+1. PICO font X by Y  = 4 by 6 . 288 characters. pFontPicoptr
+2. UNO font X by Y = 6 by 8 . 147 characters. pFontUnoptr
+3. MEGA font X by Y  = 16 by 16 . 32 characters pFontMegaptr
 
 More fonts can be found here at  [link](http://www.rinkydinkelectronics.com/r_fonts.php),as  well as instructions on how to create them.
 
