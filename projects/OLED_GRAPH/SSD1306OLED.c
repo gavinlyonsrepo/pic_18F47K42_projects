@@ -684,7 +684,7 @@ void SSD1306_FillCircleHelper(int16_t x0, int16_t y0, int16_t r,
 /*
  * Desc: Write character on OLED.
  * Param1:  x: character starting position on x-axis. Valid values: 0..127
- * Param2:  y: character starting position on x-axis. Valid values: 0..63
+ * Param2:  y: character starting position on y-axis. Valid values: 0..63
  * Param3:  value: Character to be written.
  */
 void SSD1306_Write(int16_t x, int16_t y, char value) {
