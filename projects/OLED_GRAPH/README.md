@@ -50,8 +50,9 @@ There is a USER OPTION SELECTION section by top of header file to select screen 
 2. UNO font X by Y = 6 by 8 . 147 characters. pFontUnoptr
 3. MEGA font X by Y  = 16 by 16 . 32 characters pFontMegaptr
 
-More fonts can be found here at  [link](http://www.rinkydinkelectronics.com/r_fonts.php),as  well as instructions on how to create them.
+More fonts can be found here at  [link](http://www.rinkydinkelectronics.com/r_fonts.php).
 
+[Font creation tool](https://github.com/gavinlyonsrepo/Colossus_LTSM)
 
 **Bitmaps** 
 
@@ -59,6 +60,8 @@ Two bitmap functions,
 
 1. SSD1306_Bitmap. Entire screen only,  Data Vertically addressed, writes directly to screen.
 2. SSD1306_BitmapBuffer.  Can be any size. Data Horizontally addressed. Writes to buffer.
+
+[Bitmap data creation tool](https://github.com/gavinlyonsrepo/Guardian_LTSM)
 
 Output
 -----------------------
