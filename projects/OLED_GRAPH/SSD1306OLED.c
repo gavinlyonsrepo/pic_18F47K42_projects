@@ -563,7 +563,7 @@ void SSD1306_FillRoundRect(int16_t x, int16_t y, int16_t w,
  * Desc: OLED Image.
  * Displays bitmap image on OLED.
  * Param1:  *image: image to be displayed. Bitmap array must be located in code
- * memory. DATA vertical addressed Use https://javl.github.io/image2cpp/
+ * memory. DATA vertical addressed Use https://github.com/gavinlyonsrepo/Guardian_LTSM
  * NOTES Writes to SCREEN  NOT BUFFER , FULL SCREEN BITMAP ONLY 
  */
 void SSD1306_Bitmap(const uint8_t *image) {
